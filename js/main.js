@@ -21,7 +21,7 @@
       syncBackdrop();
     });
 
-    document.querySelectorAll(".nav a").forEach(function (link) {
+    document.querySelectorAll(".nav a, .btn--login").forEach(function (link) {
       link.addEventListener("click", function () {
         body.classList.remove("nav-open");
         navToggle.setAttribute("aria-expanded", "false");

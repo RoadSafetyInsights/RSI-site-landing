@@ -29,6 +29,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
 body {
   margin: 0;
   font-family: var(--font);
@@ -122,6 +126,8 @@ body.nav-open .site-header {
   border-radius: var(--radius-sm);
   font-weight: 600;
   display: none;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .btn--login:hover {
@@ -228,7 +234,7 @@ body.nav-open .site-header {
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.85rem;
   justify-content: center;
   align-items: center;
 }
@@ -330,7 +336,7 @@ body.nav-open .site-header {
 
 .section--interest {
   background: #f4f7fb;
-  padding: 4rem 0;
+  padding: 4.5rem 0;
 }
 
 .section__title {
@@ -1093,12 +1099,17 @@ body.nav-open .site-header {
 .driver-form {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.75rem;
   margin-top: auto;
 }
 
 .driver-form .field__label {
   font-size: 0.8125rem;
+}
+
+.driver-form__success,
+.driver-form__duplicate {
+  margin: 0;
 }
 
 .btn--driver-submit {
@@ -1156,6 +1167,7 @@ body.nav-open .site-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: 0.85rem;
   font-size: 0.875rem;
   color: var(--navy-heading);
   cursor: pointer;
@@ -1173,6 +1185,7 @@ body.nav-open .site-header {
   background: var(--white);
   border-radius: var(--radius);
   padding: 2rem 1.5rem;
+  margin-top: 0.5rem;
   box-shadow: var(--shadow);
   border: 1px solid rgba(209, 227, 240, 0.8);
 }
@@ -1255,14 +1268,35 @@ body.nav-open .site-header {
 }
 
 .site-footer {
-  padding: 2rem 1rem;
+  padding: 2.25rem 1rem;
   text-align: center;
   font-size: 0.8125rem;
   color: var(--text-muted);
+  border-top: 1px solid rgba(209, 227, 240, 0.6);
+  background: var(--white);
 }
 
-.site-footer p {
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.site-footer__copy,
+.site-footer__contact {
   margin: 0;
+}
+
+.site-footer__contact a {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.site-footer__contact a:hover {
+  color: var(--primary-bright);
+  text-decoration: underline;
 }
 
 .nav-backdrop {
