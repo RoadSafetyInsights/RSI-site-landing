@@ -1090,6 +1090,21 @@ body.nav-open .site-header {
   margin-top: auto;
 }
 
+.driver-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: auto;
+}
+
+.driver-form .field__label {
+  font-size: 0.8125rem;
+}
+
+.btn--driver-submit {
+  width: 100%;
+}
+
 @media (max-width: 599px) {
   .persona-row {
     grid-template-columns: 1fr;
@@ -1228,6 +1243,13 @@ body.nav-open .site-header {
 .biz-form__success {
   margin: 0.85rem 0 0;
   color: #166534;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.biz-form__duplicate {
+  margin: 0.85rem 0 0;
+  color: #b45309;
   font-weight: 600;
   font-size: 0.9375rem;
 }

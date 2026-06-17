@@ -85,7 +85,7 @@
                   />
                 </svg>
               </div>
-              <h3 class="feature-card__title">Οδηγοί</h3>
+              <h3 class="feature-card__title">Drivers</h3>
               <p class="feature-card__text">
                 Λάβετε ειδοποιήσεις για επικίνδυνα σημεία πριν φτάσετε.
               </p>
@@ -111,7 +111,7 @@
                   />
                 </svg>
               </div>
-              <h3 class="feature-card__title">Ασφάλειες</h3>
+              <h3 class="feature-card__title">Insurance Companies</h3>
               <p class="feature-card__text">
                 Δεδομένα ρεαλιστικού κινδύνου για καλύτερη τιμολόγηση και αξιολόγηση
                 κινδύνου.
@@ -125,7 +125,7 @@
                   />
                 </svg>
               </div>
-              <h3 class="feature-card__title">Δήμοι</h3>
+              <h3 class="feature-card__title">Public Sector</h3>
               <p class="feature-card__text">
                 Κατανοήστε πού υπάρχουν επικίνδυνα σημεία για καλύτερη προτεραιοποίηση
                 παρεμβάσεων.
@@ -360,11 +360,39 @@
               <p class="persona-card__text">
                 Θέλω να με προειδοποιεί για επικίνδυνα σημεία στη διαδρομή μου.
               </p>
-              <button type="button" class="btn btn--primary btn--driver-cta">
-                Με ενδιαφέρει <span aria-hidden="true">→</span>
-              </button>
+              <form
+                name="driver-interest"
+                method="POST"
+                data-netlify="true"
+                class="driver-form"
+                id="driver-form"
+              >
+                <input type="hidden" name="form-name" value="driver-interest" />
+                <input type="hidden" name="type" value="driver" />
+                <input type="hidden" name="timestamp" />
+                <label class="field field--full">
+                  <span class="field__label">Email <abbr title="υποχρεωτικό">*</abbr></span>
+                  <input
+                    type="email"
+                    name="email"
+                    id="driver-email"
+                    required
+                    autocomplete="email"
+                    placeholder="your@email.com"
+                  />
+                </label>
+                <button type="submit" class="btn btn--primary btn--block btn--driver-submit">
+                  Με ενδιαφέρει <span aria-hidden="true">→</span>
+                </button>
+                <p class="biz-form__success driver-form__success" hidden aria-live="polite">
+                  Ευχαριστούμε! Καταγράφηκε.
+                </p>
+                <p class="biz-form__duplicate driver-form__duplicate" hidden aria-live="polite">
+                  Έχετε ήδη εκδηλώσει ενδιαφέρον με αυτό το email.
+                </p>
+              </form>
               <label class="persona-card__opt">
-                <input type="radio" name="news" value="yes" checked />
+                <input type="checkbox" name="news" value="yes" checked />
                 <span>Θέλω να ενημερώνομαι</span>
               </label>
             </article>
@@ -376,7 +404,7 @@
               >
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                   <path
-                    d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"
+                    d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"
                   />
                 </svg>
               </div>
@@ -389,12 +417,6 @@
               </button>
             </article>
           </div>
-
-          <form name="driver-interest" method="POST" data-netlify="true" hidden>
-            <input type="hidden" name="form-name" value="driver-interest" />
-            <input type="hidden" name="type" value="driver" />
-            <input type="hidden" name="timestamp" />
-          </form>
 
           <div class="form-card" id="business-form" hidden aria-hidden="true">
             <h2 class="form-card__title">Στοιχεία επιχείρησης</h2>
@@ -448,7 +470,7 @@
                     <option value="" selected disabled>Επίλεξε…</option>
                     <option value="rent-a-car">Rent-a-car</option>
                     <option value="insurance">Insurance</option>
-                    <option value="municipality">Municipality</option>
+                    <option value="municipality">Municipality / Public Sector</option>
                     <option value="other">Άλλο</option>
                   </select>
                 </label>
@@ -458,6 +480,9 @@
               </button>
               <p class="biz-form__success" hidden aria-live="polite">
                 Ευχαριστούμε! Το ενδιαφέρον σας καταγράφηκε με επιτυχία.
+              </p>
+              <p class="biz-form__duplicate" hidden aria-live="polite">
+                Έχετε ήδη εκδηλώσει ενδιαφέρον με αυτό το email.
               </p>
             </form>
           </div>
