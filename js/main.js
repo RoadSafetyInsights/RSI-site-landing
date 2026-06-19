@@ -1,6 +1,4 @@
 (function () {
-  var STORAGE_KEY = "rsi-interest-submissions";
-
   /* ── Nav toggle ─────────────────────────────────────────── */
   var navToggle = document.querySelector(".nav-toggle");
   var body = document.body;
@@ -40,33 +38,6 @@
     syncBackdrop();
   }
 
-  /* ── localStorage helpers ────────────────────────────────── */
-  function normalizeEmail(email) {
-    return String(email || "").trim().toLowerCase();
-  }
-
-  function getSubmissions() {
-    try {
-      var stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? JSON.parse(stored) : [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function hasSubmitted(email) {
-    var norm = normalizeEmail(email);
-    return norm && getSubmissions().some(function (entry) {
-      return entry.email === norm;
-    });
-  }
-
-  function recordSubmission(email, type) {
-    var submissions = getSubmissions();
-    submissions.push({ email: normalizeEmail(email), type: type, at: new Date().toISOString() });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(submissions));
-  }
-
   function encodeFormData(data) {
     return Object.keys(data).map(function (key) {
       return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
@@ -102,24 +73,15 @@
   var driverEmailInput = document.getElementById("driver-email");
   var driverSubmitBtn  = driverForm ? driverForm.querySelector(".btn--driver-submit") : null;
   var driverSuccess    = driverForm ? driverForm.querySelector(".driver-form__success") : null;
-  var driverDuplicate  = driverForm ? driverForm.querySelector(".driver-form__duplicate") : null;
 
   if (driverForm) {
     driverForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (driverSubmitBtn && driverSubmitBtn.disabled) return;
 
       var email = driverEmailInput ? driverEmailInput.value.trim() : "";
       if (!email) { if (driverEmailInput) driverEmailInput.focus(); return; }
 
-      if (driverSuccess)   driverSuccess.hidden   = true;
-      if (driverDuplicate) driverDuplicate.hidden = true;
-
-      if (hasSubmitted(email)) {
-        if (driverDuplicate) driverDuplicate.hidden = false;
-        return;
-      }
-
+      if (driverSuccess) driverSuccess.hidden = true;
       if (driverSubmitBtn) driverSubmitBtn.disabled = true;
 
       var timestampInput = driverForm.querySelector('[name="timestamp"]');
@@ -138,19 +100,15 @@
         body: encodeFormData(payload)
       })
         .then(function () {
-          recordSubmission(email, "driver");
           if (driverSuccess) driverSuccess.hidden = false;
         })
         .catch(function () {
+          /* Allow retry on failure */
+        })
+        .finally(function () {
           if (driverSubmitBtn) driverSubmitBtn.disabled = false;
         });
     });
-
-    if (driverEmailInput) {
-      driverEmailInput.addEventListener("input", function () {
-        if (driverDuplicate && !driverDuplicate.hidden) driverDuplicate.hidden = true;
-      });
-    }
   }
 
   /* ── Business form card ──────────────────────────────────── */
@@ -170,24 +128,13 @@
 
   var bizForm = document.querySelector(".biz-form");
   if (bizForm) {
-    var bizSubmitBtn    = bizForm.querySelector(".biz-form__submit");
-    var bizSuccess      = bizForm.querySelector(".biz-form__success");
-    var bizDuplicate    = bizForm.querySelector(".biz-form__duplicate");
-    var bizEmailInput   = bizForm.querySelector('[name="email"]');
+    var bizSubmitBtn  = bizForm.querySelector(".biz-form__submit");
+    var bizSuccess    = bizForm.querySelector(".biz-form__success");
 
     bizForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (bizSubmitBtn && bizSubmitBtn.disabled) return;
 
-      if (bizSuccess)   bizSuccess.hidden   = true;
-      if (bizDuplicate) bizDuplicate.hidden = true;
-
-      var email = bizEmailInput ? bizEmailInput.value.trim() : "";
-
-      if (hasSubmitted(email)) {
-        if (bizDuplicate) bizDuplicate.hidden = false;
-        return;
-      }
+      if (bizSuccess) bizSuccess.hidden = true;
 
       var formData = new FormData(bizForm);
       formData.set("timestamp", new Date().toISOString());
@@ -202,18 +149,14 @@
         body: encodeFormData(payload)
       })
         .then(function () {
-          recordSubmission(email, "business");
           if (bizSuccess) bizSuccess.hidden = false;
         })
         .catch(function () {
+          /* Allow retry on failure */
+        })
+        .finally(function () {
           if (bizSubmitBtn) bizSubmitBtn.disabled = false;
         });
     });
-
-    if (bizEmailInput) {
-      bizEmailInput.addEventListener("input", function () {
-        if (bizDuplicate && !bizDuplicate.hidden) bizDuplicate.hidden = true;
-      });
-    }
   }
 })();
