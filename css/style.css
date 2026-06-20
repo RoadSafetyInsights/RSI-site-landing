@@ -1238,7 +1238,8 @@ body.nav-open .site-header {
 }
 
 .field input,
-.field select {
+.field select,
+.field textarea {
   font: inherit;
   padding: 0.65rem 0.85rem;
   border: 1px solid #cbd5e1;
@@ -1246,8 +1247,14 @@ body.nav-open .site-header {
   background: var(--white);
 }
 
+.field textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
 .field input:focus,
-.field select:focus {
+.field select:focus,
+.field textarea:focus {
   outline: 2px solid rgba(0, 132, 255, 0.35);
   outline-offset: 1px;
   border-color: var(--primary-bright);
