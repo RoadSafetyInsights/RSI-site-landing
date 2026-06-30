@@ -87,10 +87,13 @@
       var timestampInput = driverForm.querySelector('[name="timestamp"]');
       if (timestampInput) timestampInput.value = new Date().toISOString();
 
+      var feedbackInput = driverForm.querySelector('[name="dangerous_roads_feedback"]');
+
       var payload = {
         "form-name": "driver-interest",
         type: "driver",
         email: email,
+        dangerous_roads_feedback: feedbackInput ? feedbackInput.value.trim() : "",
         timestamp: new Date().toISOString()
       };
 

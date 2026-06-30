@@ -1237,6 +1237,13 @@ body.nav-open .site-header {
   text-decoration: none;
 }
 
+.field__hint {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
 .field input,
 .field select,
 .field textarea {
