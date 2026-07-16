@@ -1,8 +1,3 @@
-/* =====================================================================
-   Road Safety Insights — Landing Page
-   Complete Neumorphic / Futuristic Redesign
-   ===================================================================== */
-
 :root {
   /* Brand accents */
   --primary: #007bc2;
@@ -204,7 +199,6 @@ body.nav-open .site-header {
   min-width: 0;
 }
 
-/* Header Logo Image Container */
 .logo-mark {
   flex-shrink: 0;
   width: 40px; 
@@ -219,7 +213,7 @@ body.nav-open .site-header {
 }
 
 .logo-mark img {
-  width: 80%;
+  width: 80%; 
   height: 80%;
   object-fit: contain; 
 }
@@ -1018,17 +1012,17 @@ body.nav-open .site-header {
 /* =========================================
    PHOTO GALLERY SECTIONS
    ========================================= */
-.gallery-grid--screenshots {
+.gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
-  gap: 2rem;
-  justify-content: center;
-  max-width: 900px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.35rem;
 }
 
-.team-gallery-single {
-  max-width: 600px;
+/* Specific size constraint for Application Screenshots */
+.gallery-grid--screenshots {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+  justify-content: center;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -1070,24 +1064,6 @@ body.nav-open .site-header {
   background: linear-gradient(to top, rgba(0, 11, 46, 0.82), transparent);
 }
 
-.gallery-frame__placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  text-align: center;
-  color: var(--text-muted);
-  background: repeating-linear-gradient(135deg, rgba(0, 132, 255, 0.05) 0 10px, transparent 10px 20px);
-}
-
-.gallery-frame__placeholder-icon { font-size: 1.75rem; opacity: 0.6; }
-.gallery-frame__placeholder-text { font-size: 0.78rem; font-weight: 600; }
-.gallery-frame__placeholder-path { font-size: 0.68rem; font-family: "Space Grotesk", monospace; opacity: 0.7; }
-
 .gallery-frame--dark {
   background: var(--void-bg);
   box-shadow: var(--shadow-void-sm);
@@ -1095,9 +1071,16 @@ body.nav-open .site-header {
 
 .gallery-frame--dark:hover { box-shadow: var(--shadow-void-sm), 0 0 0 1px rgba(0, 194, 255, 0.18); }
 
-.gallery-frame--dark .gallery-frame__placeholder {
-  color: rgba(255, 255, 255, 0.55);
-  background: repeating-linear-gradient(135deg, rgba(0, 194, 255, 0.06) 0 10px, transparent 10px 20px);
+/* Ensure the dark section containing the single image establishes block formatting context */
+#gallery-team {
+  overflow: hidden;
+  padding-bottom: 2rem;
+}
+
+/* Specific size constraint for the single Team Photo */
+.team-gallery-single {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* =========================================
@@ -1307,18 +1290,43 @@ body.nav-open .site-header {
 }
 
 /* =========================================
-   MOBILE MENU / BACKDROP
+   MOBILE MENU & ANIMATION
    ========================================= */
-/* =========================================
-   SMOOTH MOBILE MENU ANIMATION
-   ========================================= */
-body.nav-open { overflow: hidden; }
+@media (max-width: 1179px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(280px, 85vw);
+    background: var(--navy-deep);
+    padding: 4rem 1.5rem;
+    z-index: 110;
+    
+    /* Always present: animation setup */
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+    visibility: hidden;
+  }
 
-/* Backdrop Fade */
+  body.nav-open .nav {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  body.nav-open .btn--login {
+    display: inline-flex;
+    margin-top: 1rem;
+  }
+}
+
 .nav-backdrop {
   position: fixed; inset: 0; z-index: 50;
-  background: rgba(0, 11, 46, 0.7); 
-  backdrop-filter: blur(5px);
+  background: rgba(0, 11, 46, 0.6);
+  backdrop-filter: blur(3px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s;
@@ -1329,22 +1337,4 @@ body.nav-open .nav-backdrop {
   visibility: visible;
 }
 
-/* Slide-in Navigation */
-body.nav-open .nav {
-  display: flex; flex-direction: column; position: fixed;
-  top: 0; right: 0; bottom: 0; width: min(280px, 85vw);
-  background: var(--navy-deep); 
-  padding: 4rem 1.5rem;
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.4); 
-  z-index: 110;
-  
-  /* The Secret Sauce: Transform animation */
-  transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-body.nav-open.nav-open .nav {
-  transform: translateX(0);
-}
-
-body.nav-open .btn--login { display: inline-flex; margin-top: 1rem; }
+body.nav-open { overflow: hidden; }
