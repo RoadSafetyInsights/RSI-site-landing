@@ -2,45 +2,34 @@
   /* Navigation Toggle */
   var navToggle = document.querySelector(".nav-toggle");
   var body = document.body;
+  var backdrop = document.getElementById("nav-backdrop");
 
   if (navToggle) {
-    var backdrop = document.getElementById("nav-backdrop");
-
-    function syncBackdrop(isOpen) {
-      if (!backdrop) return;
-      backdrop.hidden = !isOpen;
-      backdrop.setAttribute("aria-hidden", isOpen ? "false" : "true");
-    }
-
-    // Toggle menu
-    navToggle.addEventListener("click", function () {
+    function toggleMenu() {
       var isOpen = body.classList.toggle("nav-open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      syncBackdrop(isOpen);
-    });
-
-    // Close menu with delay to allow animation to finish
-    function closeMenu() {
-      // 400ms matches our CSS transition duration (0.4s)
-      setTimeout(function() {
-        body.classList.remove("nav-open");
-        navToggle.setAttribute("aria-expanded", "false");
-        syncBackdrop(false);
-      }, 300); 
+      
+      if (backdrop) {
+        backdrop.hidden = !isOpen;
+        backdrop.setAttribute("aria-hidden", isOpen ? "false" : "true");
+      }
     }
 
-    // Apply to links and backdrop
-    document.querySelectorAll(".nav a, .btn--login").forEach(function (link) {
-      link.addEventListener("click", closeMenu);
-    });
+    navToggle.addEventListener("click", toggleMenu);
 
-    if (backdrop) {
-      backdrop.addEventListener("click", closeMenu);
-    }
+    // Close when clicking links, login button, or the backdrop
+    document.querySelectorAll(".nav a, .btn--login, .nav-backdrop").forEach(function (el) {
+      el.addEventListener("click", function() {
+        // Only trigger close if it's currently open
+        if(body.classList.contains("nav-open")) {
+          toggleMenu();
+        }
+      });
+    });
   }
-  
+
   /* ── Persona card selection ──────────────────────────────── */
-  var driverCard   = document.querySelector('[data-persona="driver"]');
+  var driverCard = document.querySelector('[data-persona="driver"]');
   var businessCard = document.querySelector('[data-persona="business"]');
 
   function setPersona(isDriver) {
@@ -63,27 +52,27 @@
     });
   }
 
-  /* ── Driver inline form ──────────────────────────────────── */
-  var driverForm       = document.getElementById("driver-form");
-  var driverEmailInput = document.getElementById("driver-email");
-  var driverSubmitBtn  = driverForm ? driverForm.querySelector(".btn--driver-submit") : null;
-  var driverSuccess    = driverForm ? driverForm.querySelector(".driver-form__success") : null;
+  /* ── Forms (Driver/Business) ──────────────────────────────────── */
+  function encodeFormData(data) {
+    return Object.keys(data).map(function (key) {
+      return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+    }).join("&");
+  }
 
+  var driverForm = document.getElementById("driver-form");
   if (driverForm) {
+    var driverSubmitBtn  = driverForm.querySelector(".btn--driver-submit");
+    
     driverForm.addEventListener("submit", function (e) {
       e.preventDefault();
+      
+      var emailInput = driverForm.querySelector('[name="email"]');
+      var email = emailInput ? emailInput.value.trim() : "";
+      if (!email) return;
 
-      var email = driverEmailInput ? driverEmailInput.value.trim() : "";
-      if (!email) { if (driverEmailInput) driverEmailInput.focus(); return; }
-
-      if (driverSuccess) driverSuccess.hidden = true;
       if (driverSubmitBtn) driverSubmitBtn.disabled = true;
 
-      var timestampInput = driverForm.querySelector('[name="timestamp"]');
-      if (timestampInput) timestampInput.value = new Date().toISOString();
-
       var feedbackInput = driverForm.querySelector('[name="dangerous_roads_feedback"]');
-
       var payload = {
         "form-name": "driver-interest",
         type: "driver",
@@ -91,28 +80,24 @@
         dangerous_roads_feedback: feedbackInput ? feedbackInput.value.trim() : "",
         timestamp: new Date().toISOString()
       };
-
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encodeFormData(payload)
+      
+      fetch("/", { 
+        method: "POST", 
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
+        body: encodeFormData(payload) 
       })
-        .then(function () {
-          if (driverSuccess) driverSuccess.hidden = false;
-        })
-        .catch(function () {
-          /* Allow retry on failure */
-        })
-        .finally(function () {
-          if (driverSubmitBtn) driverSubmitBtn.disabled = false;
-        });
+      .then(function () { 
+        var successMsg = driverForm.querySelector(".driver-form__success");
+        if(successMsg) successMsg.hidden = false; 
+      })
+      .finally(function() {
+        if (driverSubmitBtn) driverSubmitBtn.disabled = false;
+      });
     });
   }
 
-  /* ── Business form card ──────────────────────────────────── */
-  var formCard    = document.getElementById("business-form");
+  var formCard = document.getElementById("business-form");
   var businessCta = document.querySelector(".btn--persona-cta");
-
   if (businessCta) {
     businessCta.addEventListener("click", function () {
       setPersona(false);
@@ -126,36 +111,30 @@
 
   var bizForm = document.querySelector(".biz-form");
   if (bizForm) {
-    var bizSubmitBtn  = bizForm.querySelector(".biz-form__submit");
-    var bizSuccess    = bizForm.querySelector(".biz-form__success");
-
+    var bizSubmitBtn = bizForm.querySelector(".biz-form__submit");
+    
     bizForm.addEventListener("submit", function (e) {
       e.preventDefault();
-
-      if (bizSuccess) bizSuccess.hidden = true;
+      
+      if (bizSubmitBtn) bizSubmitBtn.disabled = true;
 
       var formData = new FormData(bizForm);
       formData.set("timestamp", new Date().toISOString());
       var payload = {};
       formData.forEach(function (value, key) { payload[key] = value; });
 
-      if (bizSubmitBtn) bizSubmitBtn.disabled = true;
-
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encodeFormData(payload)
+      fetch("/", { 
+        method: "POST", 
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
+        body: encodeFormData(payload) 
       })
-        .then(function () {
-          if (bizSuccess) bizSuccess.hidden = false;
-        })
-        .catch(function () {
-          /* Allow retry on failure */
-        })
-        .finally(function () {
-          if (bizSubmitBtn) bizSubmitBtn.disabled = false;
-        });
+      .then(function () { 
+        var successMsg = bizForm.querySelector(".biz-form__success");
+        if(successMsg) successMsg.hidden = false; 
+      })
+      .finally(function() {
+        if (bizSubmitBtn) bizSubmitBtn.disabled = false;
+      });
     });
   }
 })();
-
