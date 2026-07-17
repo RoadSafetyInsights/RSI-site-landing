@@ -1,6 +1,6 @@
 function initLandingPage() {
   
-// Navigation toggle logic for mobile menu. Clicking the hamburger icon will open/close the menu and update ARIA attributes accordingly.
+  // Navigation toggle logic for mobile menu. Clicking the hamburger icon will open/close the menu and update ARIA attributes accordingly.
   var navToggle = document.querySelector(".nav-toggle");
   var body = document.body;
   var backdrop = document.getElementById("nav-backdrop");
@@ -24,13 +24,9 @@ function initLandingPage() {
       toggleMenu();
     }
 
-    navToggle.addEventListener("pointerup", handleToggle);
-    navToggle.addEventListener("touchend", handleToggle, { passive: false });
-    navToggle.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") {
-        handleToggle(e);
-      }
-    });
+    // This one listener perfectly handles mouse clicks, mobile screen taps, 
+    // AND keyboard Enter/Spacebar accessibility.
+    navToggle.addEventListener("click", handleToggle);
 
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && body.classList.contains("nav-open")) {
@@ -49,7 +45,7 @@ function initLandingPage() {
     });
   }
 
-// Persona selection logic for the landing page. Clicking on a persona card will highlight it and unhighlight the other.
+  // Persona selection logic for the landing page. Clicking on a persona card will highlight it and unhighlight the other.
   var driverCard = document.querySelector('[data-persona="driver"]');
   var businessCard = document.querySelector('[data-persona="business"]');
 
@@ -73,7 +69,7 @@ function initLandingPage() {
     });
   }
 
-// Submissions from Netlify forms require the data to be sent as URL-encoded form data. This function converts a JavaScript object into a URL-encoded string.
+  // Submissions from Netlify forms require the data to be sent as URL-encoded form data. This function converts a JavaScript object into a URL-encoded string.
   function encodeFormData(data) {
     return Object.keys(data).map(function (key) {
       return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
