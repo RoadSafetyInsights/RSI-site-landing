@@ -311,6 +311,8 @@ body.nav-open .site-header {
   border: 0;
   padding: 0.5rem;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-toggle span {
@@ -1100,6 +1102,36 @@ body.nav-open .site-header {
   text-align: center;
   box-shadow: var(--shadow);
   transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+}
+
+/* =========================================
+   TEAM CARD SOCIAL LINKS
+   ========================================= */
+.team-card__socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.team-card__socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--neu-bg);
+  color: var(--text-muted);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.team-card__socials a:hover {
+  color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
 }
 
 .team-card:hover {
