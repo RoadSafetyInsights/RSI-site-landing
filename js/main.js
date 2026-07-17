@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+function initLandingPage() {
   
 // Navigation toggle logic for mobile menu. Clicking the hamburger icon will open/close the menu and update ARIA attributes accordingly.
   var navToggle = document.querySelector(".nav-toggle");
@@ -9,23 +9,40 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleMenu() {
       var isOpen = body.classList.toggle("nav-open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      
+
       if (backdrop) {
         backdrop.hidden = !isOpen;
         backdrop.setAttribute("aria-hidden", isOpen ? "false" : "true");
       }
     }
 
-    navToggle.addEventListener("click", function (e) {
-      e.preventDefault(); // Prevents jumpiness on mobile taps
+    function handleToggle(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       toggleMenu();
+    }
+
+    navToggle.addEventListener("pointerup", handleToggle);
+    navToggle.addEventListener("touchend", handleToggle, { passive: false });
+    navToggle.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        handleToggle(e);
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && body.classList.contains("nav-open")) {
+        toggleMenu();
+      }
     });
 
     // Close when clicking links, login button, or the backdrop
     document.querySelectorAll(".nav a, .btn--login, .nav-backdrop").forEach(function (el) {
-      el.addEventListener("click", function() {
+      el.addEventListener("click", function () {
         // Only trigger close if it's currently open
-        if(body.classList.contains("nav-open")) {
+        if (body.classList.contains("nav-open")) {
           toggleMenu();
         }
       });
@@ -144,4 +161,10 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initLandingPage);
+} else {
+  initLandingPage();
+}
