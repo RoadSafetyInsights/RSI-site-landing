@@ -257,7 +257,7 @@ textarea { resize: vertical; }
 .foot__meta a:hover { text-decoration: underline; }
 
 /* ---------- reveal ---------- */
-.up { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); transition-delay: var(--d, 0ms); }
+.up { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); transition-delay: var(--d, 0ms); }
 .up.is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .up { opacity: 1; transform: none; transition: none; }
