@@ -257,7 +257,7 @@ textarea { resize: vertical; }
 .foot__meta a:hover { text-decoration: underline; }
 
 /* ---------- reveal ---------- */
-.up { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); transition-delay: var(--d, 0ms); }
+.up { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); transition-delay: var(--d, 0ms); }
 .up.is-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .up { opacity: 1; transform: none; transition: none; }
@@ -270,7 +270,7 @@ textarea { resize: vertical; }
   .zig { grid-template-columns: 1fr; }
 }
 @media (max-width: 880px) {
-  .rail { transform: translateX(-100%); transition: transform .35s ease; width: 260px; }
+  .rail { transform: translateX(-100%); transition: transform .35s ease; width: 260px; padding-top: 84px; }
   .rail.is-open { transform: none; }
   main, .foot { margin-left: 0; }
   .progress { left: 0; }
@@ -282,7 +282,7 @@ textarea { resize: vertical; }
   .tiles, .shots, .field-row { grid-template-columns: 1fr; }
   .layer { grid-template-columns: 44px 1fr; }
   .layer__val { grid-column: 2; }
-  .person { grid-template-columns: 48px 1fr; }
+  .person { grid-template-columns: 72px 1fr; gap: 24px; }
   .person__role, .person__links { grid-column: 2; }
   .foot__meta { text-align: left; }
 }
