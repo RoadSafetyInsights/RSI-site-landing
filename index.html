@@ -295,7 +295,7 @@
         </div>
       </section>
 
-      <!-- INTEREST -->
+     <!-- INTEREST -->
       <section class="band band--cta" id="interest">
         <div class="wrap">
           <header class="head head--center up">
@@ -311,8 +311,8 @@
 
           <div class="panel up" id="panel-driver" role="tabpanel" aria-labelledby="tab-driver">
             <p class="panel__lead">Θέλω να με προειδοποιεί για επικίνδυνα σημεία στη διαδρομή μου.</p>
-            <!-- FIX: Added data-netlify, form name, and mapped the classes so JS can target them successfully -->
-            <form id="driver-form" name="driver-interest" data-netlify="true">
+            <!-- Form with Netlify reCAPTCHA enabled -->
+            <form id="driver-form" name="driver-interest" data-netlify="true" data-netlify-recaptcha="true">
               <label class="field">
                 <span>Email <abbr title="υποχρεωτικό">*</abbr></span>
                 <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" />
@@ -322,9 +322,11 @@
                 <textarea name="dangerous_roads_feedback" rows="4" placeholder="π.χ. Στροφή στην επαρχιακή οδό…, δρόμος χωρίς φωτισμό…, σημείο με συχνά ατυχήματα…"></textarea>
               </label>
               <label class="checkline"><input type="checkbox" name="news" checked /><span>Θέλω να ενημερώνομαι</span></label>
-              <!-- Added btn--driver-submit class -->
+              
+              <!-- Netlify CAPTCHA injection div -->
+              <div data-netlify-recaptcha="true" style="margin-bottom: 1rem;"></div>
+              
               <button class="btn btn--solid btn--block btn--driver-submit" type="submit">Με ενδιαφέρει <span class="arrow" aria-hidden="true">→</span></button>
-              <!-- Added driver-form__success class -->
               <p class="form-ok driver-form__success" id="driver-ok" hidden aria-live="polite">Ευχαριστούμε! Καταγράφηκε.</p>
             </form>
           </div>
@@ -334,7 +336,8 @@
             <h3>Στοιχεία επιχείρησης</h3>
             <p class="panel__note">Συμπλήρωσε τα στοιχεία σου και θα επικοινωνήσουμε μαζί σου σύντομα.</p>
             
-            <form id="biz-form" class="biz-form" name="business-contact" data-netlify="true">
+            <!-- Form with Netlify reCAPTCHA enabled -->
+            <form id="biz-form" class="biz-form" name="business-contact" data-netlify="true" data-netlify-recaptcha="true">
               <label class="field"><span>Ονοματεπώνυμο</span><input type="text" name="name" autocomplete="name" /></label>
               <div class="field-row">
                 <label class="field"><span>Email <abbr title="υποχρεωτικό">*</abbr></span><input type="email" name="email" required autocomplete="email" /></label>
@@ -357,6 +360,9 @@
                 <span>Θέλετε demo ή περισσότερες πληροφορίες;</span>
                 <textarea name="demo_info" rows="4" placeholder="π.χ. Θα θέλαμε να δούμε demo ή να μάθουμε περισσότερα για πιθανή πιλοτική συνεργασία."></textarea>
               </label>
+              
+              <!-- Netlify CAPTCHA injection div -->
+              <div data-netlify-recaptcha="true" style="margin-bottom: 1rem;"></div>
               
               <button class="btn btn--solid btn--block biz-form__submit" type="submit">Στείλε ενδιαφέρον</button>
               <p class="form-ok biz-form__success" id="biz-ok" hidden aria-live="polite">Ευχαριστούμε! Το ενδιαφέρον σας καταγράφηκε με επιτυχία.</p>
