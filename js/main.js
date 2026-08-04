@@ -1,6 +1,6 @@
 function initLandingPage() {
   
-  // Navigation toggle logic for mobile menu. Clicking the hamburger icon will open/close the menu and update ARIA attributes accordingly.
+  // Navigation toggle logic for mobile menu.
   var navToggle = document.querySelector(".nav-toggle");
   var body = document.body;
   var backdrop = document.getElementById("nav-backdrop");
@@ -24,8 +24,6 @@ function initLandingPage() {
       toggleMenu();
     }
 
-    // This one listener perfectly handles mouse clicks, mobile screen taps, 
-    // AND keyboard Enter/Spacebar accessibility.
     navToggle.addEventListener("click", handleToggle);
 
     document.addEventListener("keydown", function (e) {
@@ -34,10 +32,8 @@ function initLandingPage() {
       }
     });
 
-    // Close when clicking links, login button, or the backdrop
     document.querySelectorAll(".nav a, .btn--login, .nav-backdrop").forEach(function (el) {
       el.addEventListener("click", function () {
-        // Only trigger close if it's currently open
         if (body.classList.contains("nav-open")) {
           toggleMenu();
         }
@@ -45,7 +41,7 @@ function initLandingPage() {
     });
   }
 
-  // Persona selection logic for the landing page. Clicking on a persona card will highlight it and unhighlight the other.
+  // Persona selection logic for the landing page.
   var driverCard = document.querySelector('[data-persona="driver"]');
   var businessCard = document.querySelector('[data-persona="business"]');
 
@@ -69,7 +65,7 @@ function initLandingPage() {
     });
   }
 
-  // Submissions from Netlify forms require the data to be sent as URL-encoded form data. This function converts a JavaScript object into a URL-encoded string.
+  // Submissions from Netlify forms require the data to be sent as URL-encoded form data.
   function encodeFormData(data) {
     return Object.keys(data).map(function (key) {
       return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
@@ -92,7 +88,7 @@ function initLandingPage() {
 
       var feedbackInput = driverForm.querySelector('[name="dangerous_roads_feedback"]');
       var payload = {
-        "form-name": "driver-interest",
+        "form-name": "driver-interest", // Netlify identifier for driver form
         type: "driver",
         email: email,
         dangerous_roads_feedback: feedbackInput ? feedbackInput.value.trim() : "",
@@ -107,6 +103,7 @@ function initLandingPage() {
       .then(function () { 
         var successMsg = driverForm.querySelector(".driver-form__success");
         if(successMsg) successMsg.hidden = false; 
+        driverForm.reset();
       })
       .finally(function() {
         if (driverSubmitBtn) driverSubmitBtn.disabled = false;
@@ -140,6 +137,11 @@ function initLandingPage() {
 
       var formData = new FormData(bizForm);
       formData.set("timestamp", new Date().toISOString());
+      
+      // FIX: Dynamically grab the HTML form name and attach it for Netlify
+      var formName = bizForm.getAttribute("name") || "business-contact";
+      formData.set("form-name", formName);
+
       var payload = {};
       formData.forEach(function (value, key) { payload[key] = value; });
 
@@ -148,9 +150,17 @@ function initLandingPage() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
         body: encodeFormData(payload) 
       })
-      .then(function () { 
-        var successMsg = bizForm.querySelector(".biz-form__success");
-        if(successMsg) successMsg.hidden = false; 
+      .then(function (response) { 
+        if (response.ok) {
+          var successMsg = bizForm.querySelector(".biz-form__success");
+          if(successMsg) successMsg.hidden = false; 
+          bizForm.reset(); 
+        } else {
+          console.error("Netlify Submission Failed");
+        }
+      })
+      .catch(function(error) {
+        console.error("Network Error:", error);
       })
       .finally(function() {
         if (bizSubmitBtn) bizSubmitBtn.disabled = false;
