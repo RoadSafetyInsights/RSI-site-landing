@@ -312,7 +312,7 @@
           <div class="panel up" id="panel-driver" role="tabpanel" aria-labelledby="tab-driver">
             <p class="panel__lead">Θέλω να με προειδοποιεί για επικίνδυνα σημεία στη διαδρομή μου.</p>
             <!-- Form with Netlify reCAPTCHA enabled -->
-            <form id="driver-form" name="driver-interest" data-netlify="true" data-netlify-recaptcha="true">
+            <form id="driver-form" name="driver-interest" method="POST" data-netlify="true" data-netlify-recaptcha="true">
               <label class="field">
                 <span>Email <abbr title="υποχρεωτικό">*</abbr></span>
                 <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" />
@@ -337,7 +337,7 @@
             <p class="panel__note">Συμπλήρωσε τα στοιχεία σου και θα επικοινωνήσουμε μαζί σου σύντομα.</p>
             
             <!-- Form with Netlify reCAPTCHA enabled -->
-            <form id="biz-form" class="biz-form" name="business-contact" data-netlify="true" data-netlify-recaptcha="true">
+            <form id="biz-form" class="biz-form" name="business-contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
               <label class="field"><span>Ονοματεπώνυμο</span><input type="text" name="name" autocomplete="name" /></label>
               <div class="field-row">
                 <label class="field"><span>Email <abbr title="υποχρεωτικό">*</abbr></span><input type="email" name="email" required autocomplete="email" /></label>
