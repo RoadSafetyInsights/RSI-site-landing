@@ -1,4 +1,5 @@
 (function () {
+  /* ── 1. Scroll-Reveal Animations ── */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll(".up, .reveal"));
 
   function revealElement(el) {
@@ -28,11 +29,13 @@
       observer.observe(el);
     });
   } else {
+    // Fallback for browsers lacking IntersectionObserver support
     revealEls.forEach(function (el) {
       revealElement(el);
     });
   }
 
+  /* ── 2. Hero Parallax Effect ── */
   var hero = document.querySelector(".hero");
   var heroGlow = document.querySelector(".hero__glow");
   var heroContent = document.querySelector(".hero__content");
@@ -61,6 +64,7 @@
     });
   }
 
+  /* ── 3. Route Rail Scroll Progress Dot ── */
   var dot = document.getElementById("route-dot");
 
   if (dot && !prefersReducedMotion) {
@@ -84,10 +88,12 @@
     updateDot();
   }
 
+  /* ── 4. Cookie Banner Smooth Dismissal ── */
   var cookieBanner = document.getElementById("cookie-banner");
   var acceptBtn = document.getElementById("cookie-accept");
 
   if (cookieBanner && acceptBtn) {
+    // Show banner if consent flag is not found in localStorage
     if (!localStorage.getItem("rsi_cookie_consent")) {
       cookieBanner.removeAttribute("hidden");
     }
@@ -95,8 +101,10 @@
     acceptBtn.addEventListener("click", function () {
       localStorage.setItem("rsi_cookie_consent", "true");
       
+      // Add class to trigger CSS slide-down transition
       cookieBanner.classList.add("is-hiding");
       
+      // Wait for CSS animation (0.4s) to complete before hiding element completely
       cookieBanner.addEventListener("transitionend", function () {
         cookieBanner.setAttribute("hidden", "");
       }, { once: true });
