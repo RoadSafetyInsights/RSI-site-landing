@@ -1,68 +1,11 @@
 (function () {
-  /* ── Mobile Menu / Hamburger Toggle ─────────────────────────
-     Opens and closes the side rail on mobile devices, and closes
-     it automatically when a navigation link is clicked. */
-  var burger = document.getElementById("burger");
-  var rail = document.getElementById("rail");
-  var navLinks = document.querySelectorAll(".rail__nav a");
-
-  if (burger && rail) {
-    burger.addEventListener("click", function () {
-      rail.classList.toggle("is-open");
-      var isOpen = rail.classList.contains("is-open");
-      burger.setAttribute("aria-expanded", isOpen);
-    });
-  }
-
-  if (navLinks.length > 0) {
-    navLinks.forEach(function (link) {
-      link.addEventListener("click", function () {
-        if (window.innerWidth <= 880) {
-          rail.classList.remove("is-open");
-          if (burger) {
-            burger.setAttribute("aria-expanded", "false");
-          }
-        }
-      });
-    });
-  }
-
-  /* ── Form Tabs / Switch Logic ───────────────────────────────
-     Handles the switching between the Driver and Business interest forms. */
-  var tabDriver = document.getElementById("tab-driver");
-  var tabBiz = document.getElementById("tab-biz");
-  var panelDriver = document.getElementById("panel-driver");
-  var panelBiz = document.getElementById("panel-biz");
-
-  if (tabDriver && tabBiz && panelDriver && panelBiz) {
-    tabDriver.addEventListener("click", function () {
-      tabDriver.classList.add("is-active");
-      tabDriver.setAttribute("aria-selected", "true");
-      tabBiz.classList.remove("is-active");
-      tabBiz.setAttribute("aria-selected", "false");
-      panelDriver.hidden = false;
-      panelBiz.hidden = true;
-    });
-
-    tabBiz.addEventListener("click", function () {
-      tabBiz.classList.add("is-active");
-      tabBiz.setAttribute("aria-selected", "true");
-      tabDriver.classList.remove("is-active");
-      tabDriver.setAttribute("aria-selected", "false");
-      panelBiz.hidden = false;
-      panelDriver.hidden = true;
-    });
-  }
-
-  /* ── Scroll-reveal ────────────────────────────────────────────
-     Fades/slides any .up or .reveal element into place the first time it
-     enters the viewport. */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll(".up, .reveal"));
 
   function revealElement(el) {
     if (el.classList.contains("up")) {
       el.classList.add("is-in");
     }
+
     if (el.classList.contains("reveal")) {
       el.classList.add("is-visible");
     }
@@ -85,15 +28,11 @@
       observer.observe(el);
     });
   } else {
-    /* No IntersectionObserver support: just show everything */
     revealEls.forEach(function (el) {
       revealElement(el);
     });
   }
 
-  /* ── Hero motion accents ───────────────────────────────────
-     Adds a subtle parallax response to the hero section for a more
-     futuristic feel without affecting the content flow. */
   var hero = document.querySelector(".hero");
   var heroGlow = document.querySelector(".hero__glow");
   var heroContent = document.querySelector(".hero__content");
@@ -122,8 +61,6 @@
     });
   }
 
-  /* ── Route-rail progress dot ─────────────────────────────────
-     Moves the glowing dot down the fixed side-rail. */
   var dot = document.getElementById("route-dot");
 
   if (dot && !prefersReducedMotion) {
@@ -145,5 +82,19 @@
     });
 
     updateDot();
+  }
+
+  var cookieBanner = document.getElementById("cookie-banner");
+  var acceptBtn = document.getElementById("cookie-accept");
+
+  if (cookieBanner && acceptBtn) {
+    if (!localStorage.getItem("rsi_cookie_consent")) {
+      cookieBanner.removeAttribute("hidden");
+    }
+
+    acceptBtn.addEventListener("click", function () {
+      localStorage.setItem("rsi_cookie_consent", "true");
+      cookieBanner.setAttribute("hidden", "");
+    });
   }
 })();
