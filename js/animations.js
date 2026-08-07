@@ -94,7 +94,12 @@
 
     acceptBtn.addEventListener("click", function () {
       localStorage.setItem("rsi_cookie_consent", "true");
-      cookieBanner.setAttribute("hidden", "");
+      
+      cookieBanner.classList.add("is-hiding");
+      
+      cookieBanner.addEventListener("transitionend", function () {
+        cookieBanner.setAttribute("hidden", "");
+      }, { once: true });
     });
   }
 })();
