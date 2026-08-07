@@ -14,7 +14,6 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;500;600;800&display=swap"
       rel="stylesheet"
     />
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -310,9 +309,9 @@
 
           <div class="panel up" id="panel-driver" role="tabpanel" aria-labelledby="tab-driver">
             <p class="panel__lead">Θέλω να με προειδοποιεί για επικίνδυνα σημεία στη διαδρομή μου.</p>
-            <form id="driver-form" class="driver-form" name="driver-interest" method="post" data-netlify="true">
-              <!-- Form with Netlify reCAPTCHA enabled -->
-              <div data-netlify-recaptcha="true" style="margin-bottom: 1rem;"></div>
+            
+            <!-- Added data-netlify-recaptcha="true" to the form tag -->
+            <form id="driver-form" class="driver-form" name="driver-interest" method="post" data-netlify="true" data-netlify-recaptcha="true">
               <label class="field">
                 <span>Email <abbr title="υποχρεωτικό">*</abbr></span>
                 <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" />
@@ -323,8 +322,8 @@
               </label>
               <label class="checkline"><input type="checkbox" name="news" checked /><span>Θέλω να ενημερώνομαι</span></label>
               
-              <!-- Custom Google reCAPTCHA Box -->
-              <div class="g-recaptcha" data-sitekey="6LclaXYtAAAAAKRDixwGRRvW4CURxXYNjt_y3uSf" style="margin-bottom: 1rem;"></div>
+              <!-- Clean Netlify reCAPTCHA Div right above the button -->
+              <div data-netlify-recaptcha="true" style="margin-bottom: 1rem; margin-top: 1rem;"></div>
               
               <button class="btn btn--solid btn--block btn--driver-submit" type="submit">Με ενδιαφέρει <span class="arrow" aria-hidden="true">→</span></button>
               <p class="form-ok driver-form__success" id="driver-ok" hidden aria-live="polite">Ευχαριστούμε! Καταγράφηκε.</p>
@@ -335,9 +334,9 @@
             <p class="panel__lead">Rent-a-car, ασφαλιστική, δήμος ή άλλη, θέλω demo &amp; δεδομένα.</p>
             <h3>Στοιχεία επιχείρησης</h3>
             <p class="panel__note">Συμπλήρωσε τα στοιχεία σου και θα επικοινωνήσουμε μαζί σου σύντομα.</p>
-            <form class="biz-form" id="business-form" name="business-contact" method="post" data-netlify="true">
-              <!-- Form with Netlify reCAPTCHA enabled -->
-              <div data-netlify-recaptcha="true" style="margin-bottom: 1rem;"></div>
+            
+            <!-- Added data-netlify-recaptcha="true" to the form tag -->
+            <form class="biz-form" id="business-form" name="business-contact" method="post" data-netlify="true" data-netlify-recaptcha="true">
               <label class="field"><span>Ονοματεπώνυμο</span><input type="text" name="name" autocomplete="name" /></label>
               <div class="field-row">
                 <label class="field"><span>Email <abbr title="υποχρεωτικό">*</abbr></span><input type="email" name="email" required autocomplete="email" /></label>
@@ -361,8 +360,8 @@
                 <textarea name="demo_info" rows="4" placeholder="π.χ. Θα θέλαμε να δούμε demo ή να μάθουμε περισσότερα για πιθανή πιλοτική συνεργασία."></textarea>
               </label>
               
-              <!-- Custom Google reCAPTCHA Box -->
-              <div class="g-recaptcha" data-sitekey="6Lc6znktAAAAABODsL1x38y1KVIRKelI8bZ8caIz" style="margin-bottom: 1rem;"></div>
+              <!-- Clean Netlify reCAPTCHA Div right above the button -->
+              <div data-netlify-recaptcha="true" style="margin-bottom: 1rem; margin-top: 1rem;"></div>
               
               <button class="btn btn--solid btn--block biz-form__submit" type="submit">Στείλε ενδιαφέρον</button>
               <p class="form-ok biz-form__success" id="biz-ok" hidden aria-live="polite">Ευχαριστούμε! Το ενδιαφέρον σας καταγράφηκε με επιτυχία.</p>
@@ -371,17 +370,6 @@
       </section>
     </main>
 
-    <!-- COOKIE BANNER -->
-    <div id="cookie-banner" class="cookie-banner" hidden>
-      <div class="wrap cookie-banner__inner">
-        <p>
-          Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία σας στο <strong>RoadSafetyInsights</strong>. 
-          Συνεχίζοντας την περιήγηση, αποδέχεστε τη χρήση τους.
-        </p>
-        <button id="cookie-accept" class="btn btn--solid btn--sm" type="button">Αποδοχή</button>
-      </div>
-    </div>
-
     <footer class="foot">
       <div class="wrap foot__inner">
         <span class="foot__brand"><span aria-hidden="true">RSI</span>|  RoadSafetyInsights</span>
@@ -389,23 +377,23 @@
           <p>© 2026 RoadSafetyInsights | RSI</p>
           <p>
             Contact: <a href="mailto:info@roadsafetyinsights.com">info@roadsafetyinsights.com</a> | 
-            <a href="policy.html">Πολιτική Απορρήτου</a>
+            <a href="/privacy.html">Πολιτική Απορρήτου</a>
           </p>
         </div>
       </div>
     </footer>
     
-    <!-- COOKIE BANNER -->
+    <!-- COOKIE BANNER (Only one instance left, with the correct link) -->
     <div id="cookie-banner" class="cookie-banner" hidden>
       <div class="wrap cookie-banner__inner">
         <p>
           Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία σας στο <strong>RoadSafetyInsights</strong>. 
-          Συνεχίζοντας, αποδέχεστε τη χρήση τους. Δείτε την <a href="policy.html" style="color: var(--orange); text-decoration: underline;">Πολιτική Απορρήτου</a>.
+          Συνεχίζοντας, αποδέχεστε τη χρήση τους. Δείτε την <a href="/privacy.html" style="color: var(--orange); text-decoration: underline;">Πολιτική Απορρήτου</a>.
         </p>
         <button id="cookie-accept" class="btn btn--solid btn--sm" type="button">Αποδοχή</button>
       </div>
     </div>
-    
+
     <script src="js/main.js" defer></script>
     <script src="js/animations.js" defer></script>
   </body>
