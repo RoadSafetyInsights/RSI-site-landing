@@ -1204,6 +1204,32 @@ textarea {
   text-decoration: none !important;
 }
 
+/* cookie banner*/
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #0b0c10;
+  color: #ffffff;
+  z-index: 9999;
+  padding: 1rem 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  
+  /* Added these two lines for the smooth animation */
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+/* New class that JavaScript will add to trigger the slide-down */
+.cookie-banner.is-hiding {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.cookie-banner[hidden] {
+  display: none;
+}
+
 /* ---------- reveal ---------- */
 .up {
   opacity: 0;
