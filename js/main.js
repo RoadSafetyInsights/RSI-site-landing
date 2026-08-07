@@ -1,176 +1,100 @@
-function initLandingPage() {
+document.addEventListener('DOMContentLoaded', function() {
   
-  // Navigation toggle logic for mobile menu.
-  var navToggle = document.querySelector(".nav-toggle");
-  var body = document.body;
-  var backdrop = document.getElementById("nav-backdrop");
+  /* ── 1. Mobile Burger Menu Logic ── */
+  var burger = document.getElementById('burger');
+  var rail = document.getElementById('rail');
+  var railLinks = document.querySelectorAll('.rail__nav a, .rail__cta');
 
-  if (navToggle) {
-    function toggleMenu() {
-      var isOpen = body.classList.toggle("nav-open");
-      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-
-      if (backdrop) {
-        backdrop.hidden = !isOpen;
-        backdrop.setAttribute("aria-hidden", isOpen ? "false" : "true");
-      }
-    }
-
-    function handleToggle(e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      toggleMenu();
-    }
-
-    navToggle.addEventListener("click", handleToggle);
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && body.classList.contains("nav-open")) {
-        toggleMenu();
-      }
+  if (burger && rail) {
+    // Toggle mobile navigation drawer
+    burger.addEventListener('click', function() {
+      rail.classList.toggle('is-open');
+      var isOpen = rail.classList.contains('is-open');
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
-    document.querySelectorAll(".nav a, .btn--login, .nav-backdrop").forEach(function (el) {
-      el.addEventListener("click", function () {
-        if (body.classList.contains("nav-open")) {
-          toggleMenu();
-        }
+    // Automatically close mobile menu when clicking a navigation link
+    railLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        rail.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
       });
     });
   }
 
-  // Persona selection logic for the landing page.
-  var driverCard = document.querySelector('[data-persona="driver"]');
-  var businessCard = document.querySelector('[data-persona="business"]');
+  /* ── 2. Tabs Logic (Driver vs Business) ── */
+  var tabBtns = document.querySelectorAll('.switch__btn');
+  var panels = document.querySelectorAll('.panel');
 
-  function setPersona(isDriver) {
-    if (!driverCard || !businessCard) return;
-    driverCard.classList.toggle("persona-card--selected", isDriver);
-    businessCard.classList.toggle("persona-card--selected", !isDriver);
-  }
-
-  if (driverCard) {
-    driverCard.addEventListener("click", function (e) {
-      if (e.target.closest("label, input, button, form")) return;
-      setPersona(true);
-    });
-  }
-
-  if (businessCard) {
-    businessCard.addEventListener("click", function (e) {
-      if (e.target.closest("button.btn--persona-cta")) return;
-      setPersona(false);
-    });
-  }
-
-  // Submissions from Netlify forms require the data to be sent as URL-encoded form data.
-  function encodeFormData(data) {
-    return Object.keys(data).map(function (key) {
-      return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
-    }).join("&");
-  }
-
-  // 1. Driver Form
-  var driverForm = document.getElementById("driver-form");
-  if (driverForm) {
-    var driverSubmitBtn = driverForm.querySelector(".btn--driver-submit");
-    
-    driverForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      
-      var emailInput = driverForm.querySelector('[name="email"]');
-      var email = emailInput ? emailInput.value.trim() : "";
-      if (!email) return;
-
-      if (driverSubmitBtn) driverSubmitBtn.disabled = true;
-
-      var feedbackInput = driverForm.querySelector('[name="dangerous_roads_feedback"]');
-      var payload = {
-        "form-name": "driver-interest", // Netlify identifier for driver form
-        type: "driver",
-        email: email,
-        dangerous_roads_feedback: feedbackInput ? feedbackInput.value.trim() : "",
-        timestamp: new Date().toISOString()
-      };
-      
-      fetch("/", { 
-        method: "POST", 
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
-        body: encodeFormData(payload) 
-      })
-      .then(function () { 
-        var successMsg = driverForm.querySelector(".driver-form__success");
-        if(successMsg) successMsg.hidden = false; 
-        driverForm.reset();
-      })
-      .finally(function() {
-        if (driverSubmitBtn) driverSubmitBtn.disabled = false;
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      // Deactivate all tab buttons and hide all panels
+      tabBtns.forEach(function(b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
       });
-    });
-  }
+      panels.forEach(function(p) {
+        p.setAttribute('hidden', '');
+      });
 
-  // 2. Business Form Toggle & Submit
-  var formCard = document.getElementById("business-form");
-  var businessCta = document.querySelector(".btn--persona-cta");
-  
-  if (businessCta) {
-    businessCta.addEventListener("click", function () {
-      setPersona(false);
-      if (formCard) {
-        formCard.hidden = false;
-        formCard.setAttribute("aria-hidden", "false");
-        formCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Activate clicked tab and display target panel
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+      var targetPanel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (targetPanel) {
+        targetPanel.removeAttribute('hidden');
       }
     });
-  }
+  });
 
-  var bizForm = document.querySelector(".biz-form");
-  if (bizForm) {
-    var bizSubmitBtn = bizForm.querySelector(".biz-form__submit");
+  /* ── 3. Netlify AJAX Form Submission (with reCAPTCHA support) ── */
+  function handleFormSubmit(formId, successMsgId, submitBtnClass) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+
+    var submitBtn = form.querySelector(submitBtnClass);
     
-    bizForm.addEventListener("submit", function (e) {
-      e.preventDefault();
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent default page refresh
       
-      if (bizSubmitBtn) bizSubmitBtn.disabled = true;
+      if (submitBtn) submitBtn.disabled = true;
 
-      var formData = new FormData(bizForm);
-      formData.set("timestamp", new Date().toISOString());
-      
-      // FIX: Dynamically grab the HTML form name and attach it for Netlify
-      var formName = bizForm.getAttribute("name") || "business-contact";
-      formData.set("form-name", formName);
+      // FormData automatically gathers all fields including g-recaptcha-response token
+      var formData = new FormData(form);
 
-      var payload = {};
-      formData.forEach(function (value, key) { payload[key] = value; });
-
-      fetch("/", { 
-        method: "POST", 
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }, 
-        body: encodeFormData(payload) 
+      // Submit form via Netlify AJAX endpoint
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
       })
-      .then(function (response) { 
+      .then(function (response) {
         if (response.ok) {
-          var successMsg = bizForm.querySelector(".biz-form__success");
-          if(successMsg) successMsg.hidden = false; 
-          bizForm.reset(); 
+          // Show success message
+          var successMsg = document.getElementById(successMsgId);
+          if (successMsg) successMsg.removeAttribute("hidden");
+          
+          form.reset();
+          
+          // Reset CAPTCHA widget if reCAPTCHA is active
+          if (typeof grecaptcha !== "undefined") {
+            grecaptcha.reset();
+          }
         } else {
-          console.error("Netlify Submission Failed");
+          console.error("Form submission failed on Netlify.");
         }
       })
-      .catch(function(error) {
-        console.error("Network Error:", error);
+      .catch(function (error) {
+        console.error("Network error during submission:", error);
       })
-      .finally(function() {
-        if (bizSubmitBtn) bizSubmitBtn.disabled = false;
+      .finally(function () {
+        if (submitBtn) submitBtn.disabled = false;
       });
     });
   }
-}
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initLandingPage);
-} else {
-  initLandingPage();
-}
+  // Initialize AJAX handlers for both forms
+  handleFormSubmit("driver-form", "driver-ok", ".btn--driver-submit");
+  handleFormSubmit("business-form", "biz-ok", ".biz-form__submit");
+
+});
