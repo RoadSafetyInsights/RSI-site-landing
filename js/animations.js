@@ -99,15 +99,16 @@
     }
 
     acceptBtn.addEventListener("click", function () {
+      // 1. Store consent
       localStorage.setItem("rsi_cookie_consent", "true");
       
-      // Add class to trigger CSS slide-down transition
+      // 2. Add class to trigger CSS slide-down & fade transition
       cookieBanner.classList.add("is-hiding");
       
-      // Wait for CSS animation (0.4s) to complete before hiding element completely
-      cookieBanner.addEventListener("transitionend", function () {
+      // 3. Wait exactly 450ms (slightly more than the 0.4s CSS transition) and hide completely
+      setTimeout(function() {
         cookieBanner.setAttribute("hidden", "");
-      }, { once: true });
+      }, 450);
     });
   }
 })();
