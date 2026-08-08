@@ -1,19 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
   
-  /* ── 1. Mobile Burger Menu Logic ── */
   var burger = document.getElementById('burger');
   var header = document.getElementById('header');
   var navLinks = document.querySelectorAll('.header__nav a');
 
   if (burger && header) {
-    // Toggle mobile navigation drawer
     burger.addEventListener('click', function() {
       header.classList.toggle('is-open');
       var isOpen = header.classList.contains('is-open');
       burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
-    // Automatically close mobile menu when clicking a navigation link
     navLinks.forEach(function(link) {
       link.addEventListener('click', function() {
         header.classList.remove('is-open');
@@ -22,13 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  /* ── 2. Tabs Logic (Driver vs Business) ── */
   var tabBtns = document.querySelectorAll('.switch__btn');
   var panels = document.querySelectorAll('.panel');
 
   tabBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      // Deactivate all tab buttons and hide all panels
       tabBtns.forEach(function(b) {
         b.classList.remove('is-active');
         b.setAttribute('aria-selected', 'false');
@@ -37,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         p.setAttribute('hidden', '');
       });
 
-      // Activate clicked tab and display target panel
       btn.classList.add('is-active');
       btn.setAttribute('aria-selected', 'true');
       var targetPanel = document.getElementById(btn.getAttribute('aria-controls'));
@@ -47,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  /* ── 3. Netlify AJAX Form Submission (with reCAPTCHA support) ── */
   function handleFormSubmit(formId, successMsgId, submitBtnClass) {
     var form = document.getElementById(formId);
     if (!form) return;
@@ -55,14 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var submitBtn = form.querySelector(submitBtnClass);
     
     form.addEventListener("submit", function (e) {
-      e.preventDefault(); // Prevent default page refresh
+      e.preventDefault(); 
       
       if (submitBtn) submitBtn.disabled = true;
 
-      // FormData automatically gathers all fields including g-recaptcha-response token
       var formData = new FormData(form);
 
-      // Submit form via Netlify AJAX endpoint
       fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -70,13 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(function (response) {
         if (response.ok) {
-          // Show success message
           var successMsg = document.getElementById(successMsgId);
           if (successMsg) successMsg.removeAttribute("hidden");
           
           form.reset();
           
-          // Reset CAPTCHA widget if reCAPTCHA is active
           if (typeof grecaptcha !== "undefined") {
             grecaptcha.reset();
           }
@@ -93,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Initialize AJAX handlers for both forms
   handleFormSubmit("driver-form", "driver-ok", ".btn--driver-submit");
   handleFormSubmit("business-form", "biz-ok", ".biz-form__submit");
 
