@@ -4,47 +4,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RoadSafetyInsights | Χαρτογράφηση Επικίνδυνων Δρόμων</title>
-    <meta
-      name="description"
-      content="Η πρώτη εφαρμογή που χαρτογραφεί επικίνδυνα σημεία και προειδοποιεί οδηγούς, στόλους και δήμους με πραγματικά δεδομένα ατυχημάτων."
-    />
+    <meta name="description" content="Η πρώτη εφαρμογή που χαρτογραφεί επικίνδυνα σημεία και προειδοποιεί οδηγούς, στόλους και δήμους με πραγματικά δεδομένα ατυχημάτων." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;500;600;800&display=swap"
-      rel="stylesheet"
-    />
-    
-    <!-- ΣΗΜΕΙΩΣΗ: Διαγράφηκε το script της Google. Δεν το χρειαζόμαστε πια! -->
-    
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <a class="skip" href="#main">Μετάβαση στο περιεχόμενο</a>
 
-    <!-- LEFT RAIL -->
-      <aside class="rail" id="rail">
-      <a class="rail__logo" href="#top" aria-label="Road Safety Insights, Αρχική">
-        <img class="rail__mark" src="assets/rsi_logo.png" alt="Λογότυπο Road Safety Insights" width="512" height="512" />
-        <span class="rail__name">RoadSafetyInsights</span>
-      </a>
-      <nav class="rail__nav" aria-label="Κύρια πλοήγηση">
-        <a href="#top" data-rail><i></i>Αρχική</a>
-        <a href="#data" data-rail><i></i>Χαρακτηριστικά</a>
-        <a href="#app" data-rail><i></i>Εφαρμογή</a>
-        <a href="#gallery-app" data-rail><i></i>Στιγμιότυπα</a>
-        <a href="#team" data-rail><i></i>Η Ομάδα</a>
-        <a href="#interest" data-rail><i></i>Ενδιαφέρον</a>
-      </nav>
-      <a class="rail__cta" href="#interest">Είσοδος</a>
-    </aside>
+    <!-- NEW TOP HEADER -->
+    <header class="site-header" id="header">
+      <div class="wrap header__inner">
+        <a class="header__logo" href="index.html#top" aria-label="Road Safety Insights, Αρχική">
+          <img src="assets/rsi_logo.png" alt="Λογότυπο" width="34" height="34" />
+          <span>RoadSafetyInsights</span>
+        </a>
+        
+        <nav class="header__nav" aria-label="Κύρια πλοήγηση">
+          <a href="index.html#app">Εφαρμογή</a>
+          <a href="index.html#data">Χαρακτηριστικά</a>
+          <a href="index.html#gallery-app">Στιγμιότυπα</a>
+          <a href="team.html">Η Ομάδα</a>
+          <a class="header__cta" href="index.html#interest">Ενδιαφέρον</a>
+        </nav>
 
-    <!-- MOBILE BAR -->
-    <header class="topbar">
-      <a class="topbar__logo" href="#top"><span aria-hidden="true">RSI</span> RoadSafetyInsights</a>
-      <button class="burger" id="burger" type="button" aria-label="Άνοιγμα μενού" aria-expanded="false">
-        <span></span><span></span>
-      </button>
+        <button class="burger" id="burger" type="button" aria-label="Άνοιγμα μενού" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
 
     <div class="progress" id="progress" aria-hidden="true"></div>
@@ -56,42 +44,75 @@
           <span class="orb orb--a"></span><span class="orb orb--b"></span>
           <span class="lane lane--1"></span><span class="lane lane--2"></span><span class="lane lane--3"></span>
         </div>
-        <div class="wrap">
-          <p class="tag up"><span class="blip" aria-hidden="true"></span>RoadSafetyInsights, Early Access</p>
-          <h1 class="hero__title up" style="--d:90ms">
-            Οδηγείς σε δρόμους που δεν ξέρεις
-            <em>πόσο επικίνδυνοι είναι.</em>
-          </h1>
-          <p class="hero__lead up" style="--d:180ms">
-            Η πρώτη εφαρμογή που σε προειδοποιεί για επικίνδυνα σημεία, βασισμένη σε πραγματικά δεδομένα.
-          </p>
-          <div class="row-actions up" style="--d:250ms">
-            <a class="btn btn--solid" href="#interest">Ζήτα early access <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="btn btn--line" href="#data">Πώς λειτουργεί</a>
+        <div class="wrap hero__layout">
+          
+          <!-- Αριστερή πλευρά: Κείμενο -->
+          <div class="hero__content">
+            <p class="tag up"><span class="blip" aria-hidden="true"></span>RoadSafetyInsights, Early Access</p>
+            <h1 class="hero__title up" style="--d:90ms">
+              Οδηγείς σε δρόμους που δεν ξέρεις
+              <em>πόσο επικίνδυνοι είναι.</em>
+            </h1>
+            <p class="hero__lead up" style="--d:180ms">
+              Η πρώτη εφαρμογή που σε προειδοποιεί για επικίνδυνα σημεία, βασισμένη σε πραγματικά δεδομένα.
+            </p>
+            <div class="row-actions up" style="--d:250ms">
+              <a class="btn btn--solid" href="#interest">Ζήτα early access <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="btn btn--line" href="#app">Πώς λειτουργεί</a>
+            </div>
+            <p class="hero__foot up" style="--d:320ms">
+              <strong>Built for every road user · Drivers · Fleets · Public Sector</strong>
+              Μια εφαρμογή που μετατρέπει πραγματικά δεδομένα ατυχημάτων σε προληπτική οδική ασφάλεια.
+            </p>
           </div>
-          <p class="hero__foot up" style="--d:320ms">
-            <strong>Built for every road user · Drivers · Fleets · Public Sector</strong>
-            Μια εφαρμογή που μετατρέπει πραγματικά δεδομένα ατυχημάτων σε προληπτική οδική ασφάλεια.
-          </p>
+
+          <!-- Δεξιά πλευρά: 3D Αιωρούμενη Εικόνα -->
+          <div class="hero__visual up" style="--d:400ms">
+            <div class="floating-mockup">
+              <img src="assets/nav_map.png" alt="Χάρτης εφαρμογής RoadSafetyInsights" width="1024" height="1024" />
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- TICKER -->
-      <div class="ticker" aria-hidden="true">
-        <div class="ticker__track">
-          <span>15.000+ Καταγεγραμμένα σημεία</span><span>•</span>
-          <span>24/7 Ειδοποιήσεις</span><span>•</span>
-          <span>100% Διαφάνεια δεδομένων</span><span>•</span>
-          <span>2.500+ Ατυχήματα τον χρόνο</span><span>•</span>
-          <span>15.000+ Καταγεγραμμένα σημεία</span><span>•</span>
-          <span>24/7 Ειδοποιήσεις</span><span>•</span>
-          <span>100% Διαφάνεια δεδομένων</span><span>•</span>
-          <span>2.500+ Ατυχήματα τον χρόνο</span><span>•</span>
-        </div>
-      </div>
+      <!-- 2. APP (Zigzag) - Μεταφέρθηκε στη 2η θέση -->
+      <section class="band" id="app">
+        <div class="wrap zig">
+          <div class="zig__copy up">
+            <p class="eyebrow">Η εφαρμογή</p>
+            <h2>Γνωρίστε τον <em>κίνδυνο</em> πριν τον συναντήσετε</h2>
+            <p class="lead">
+              Η πρώτη εφαρμογή που χαρτογραφεί την επικινδυνότητα κάθε δρόμου στην Ελλάδα, βασισμένη σε πραγματικά
+              δεδομένα τροχαίων ατυχημάτων.
+            </p>
+            <div class="row-actions">
+              <a class="btn btn--solid" href="#interest">Κατεβάστε Δωρεάν <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+            <dl class="mini-stats">
+              <div><dt>15.000+</dt><dd>Καταγεγραμμένα σημεία</dd></div>
+              <div><dt>100%</dt><dd>Διαφάνεια δεδομένων</dd></div>
+              <div><dt>24/7</dt><dd>Ειδοποιήσεις</dd></div>
+            </dl>
+            <p class="tiny">Συνδρομή · Οδηγός · Χάρτης · Χαρακτηριστικά · Επιχειρήσεις · Στατιστικά</p>
+          </div>
 
-      <!-- LAYERS (stacked rows) -->
-      <section class="band">
+          <div class="zig__panel up" style="--d:120ms">
+            <p class="eyebrow">Πραγματικές Στατιστικές</p>
+            <h3>Αριθμοί που Σώζουν Ζωές</h3>
+            <p class="lead lead--sm">Αριθμοί που αποδεικνύουν την αξία της εφαρμογής</p>
+            <ul class="bars">
+              <li><span class="bars__n val--warm">15.000+</span><span>Κατηγοριοποιημένα σημεία</span><i style="--w:96%"></i></li>
+              <li><span class="bars__n val--hot">2.500+</span><span>Ατυχήματα τον χρόνο</span><i style="--w:70%"></i></li>
+              <li><span class="bars__n val--cool">N/A</span><span>Χρήστες</span><i style="--w:22%"></i></li>
+              <li><span class="bars__n val--sky">3%</span><span>Μείωση ατυχημάτων (χειρότερο σενάριο)</span><i style="--w:40%"></i></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. LAYERS (stacked rows) -->
+      <section class="band band--ink">
         <div class="wrap">
           <ol class="layers">
             <li class="layer up">
@@ -122,8 +143,8 @@
         </div>
       </section>
 
-      <!-- AUDIENCES -->
-      <section class="band band--ink" id="data">
+      <!-- 4. AUDIENCES (Features) -->
+      <section class="band" id="data">
         <div class="wrap">
           <header class="head up">
             <p class="eyebrow">Χαρακτηριστικά</p>
@@ -166,43 +187,7 @@
         </div>
       </section>
 
-      <!-- APP (zigzag) -->
-      <section class="band" id="app">
-        <div class="wrap zig">
-          <div class="zig__copy up">
-            <p class="eyebrow">Η εφαρμογή</p>
-            <h2>Γνωρίστε τον <em>κίνδυνο</em> πριν τον συναντήσετε</h2>
-            <p class="lead">
-              Η πρώτη εφαρμογή που χαρτογραφεί την επικινδυνότητα κάθε δρόμου στην Ελλάδα, βασισμένη σε πραγματικά
-              δεδομένα τροχαίων ατυχημάτων.
-            </p>
-            <div class="row-actions">
-              <a class="btn btn--solid" href="#interest">Κατεβάστε Δωρεάν <span class="arrow" aria-hidden="true">→</span></a>
-              <a class="btn btn--line" href="#data">Δείτε πώς λειτουργεί</a>
-            </div>
-            <dl class="mini-stats">
-              <div><dt>15.000+</dt><dd>Καταγεγραμμένα σημεία</dd></div>
-              <div><dt>100%</dt><dd>Διαφάνεια δεδομένων</dd></div>
-              <div><dt>24/7</dt><dd>Ειδοποιήσεις</dd></div>
-            </dl>
-            <p class="tiny">Συνδρομή · Οδηγός · Χάρτης · Χαρακτηριστικά · Επιχειρήσεις · Στατιστικά</p>
-          </div>
-
-          <div class="zig__panel up" style="--d:120ms">
-            <p class="eyebrow">Πραγματικές Στατιστικές</p>
-            <h3>Αριθμοί που Σώζουν Ζωές</h3>
-            <p class="lead lead--sm">Αριθμοί που αποδεικνύουν την αξία της εφαρμογής</p>
-            <ul class="bars">
-              <li><span class="bars__n val--warm">15.000+</span><span>Κατηγοριοποιημένα σημεία</span><i style="--w:96%"></i></li>
-              <li><span class="bars__n val--hot">2.500+</span><span>Ατυχήματα τον χρόνο</span><i style="--w:70%"></i></li>
-              <li><span class="bars__n val--cool">N/A</span><span>Χρήστες</span><i style="--w:22%"></i></li>
-              <li><span class="bars__n val--sky">3%</span><span>Μείωση ατυχημάτων (χειρότερο σενάριο)</span><i style="--w:40%"></i></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- GALLERY -->
+      <!-- 5. GALLERY -->
       <section class="band band--ink" id="gallery-app">
         <div class="wrap">
           <header class="head head--center up">
@@ -225,78 +210,7 @@
         </div>
       </section>
 
-      <!-- TEAM -->
-      <section class="band" id="team">
-        <div class="wrap">
-          <header class="head up">
-            <p class="eyebrow">Η ομάδα</p>
-            <h2>Η Ομάδα Πίσω Από το Έργο</h2>
-            <p class="head__intro">Γνωρίστε τους ανθρώπους πίσω από το RoadSafetyInsights.</p>
-          </header>
-          <ul class="roster">
-            <li class="person up">
-              <span class="person__photo"><img src="assets/flabouris.jpg" alt="Δημήτρης Φλαμπούρης" loading="lazy" width="512" height="512" /></span>
-              <span class="person__name">Δημήτρης Φλαμπούρης</span>
-              <span class="person__role">CEO &amp; Co-Founder</span>
-              <span class="person__links">
-                <a href="https://www.linkedin.com/in/dimitris-flabouris-66b7a6393" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Δημήτρης Φλαμπούρης">in</a>
-              </span>
-            </li>
-            <li class="person up" style="--d:60ms">
-              <span class="person__photo"><img src="assets/xitas.jpg" alt="Σωτήρης Χήτας" loading="lazy" width="512" height="512" /></span>
-              <span class="person__name">Σωτήρης Χήτας</span>
-              <span class="person__role">COO &amp; Co-Founder</span>
-              <span class="person__links">
-                <a href="https://www.linkedin.com/in/sotiris-xitas-b29b01387" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Σωτήρης Χήτας">in</a>
-              </span>
-            </li>
-            <li class="person up" style="--d:120ms">
-              <span class="person__photo"><img src="assets/stamatis.jpg" alt="Παύλος Σταμάτης" loading="lazy" width="512" height="512" /></span>
-              <span class="person__name">Παύλος Σταμάτης</span>
-              <span class="person__role">CFO &amp; Co-Founder</span>
-              <span class="person__links">
-                <a href="https://www.linkedin.com/in/pavlos-stamatis-3653b5398" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Παύλος Σταμάτης">in</a>
-              </span>
-            </li>
-            <li class="person up" style="--d:180ms">
-              <span class="person__photo"><img src="assets/grivas.jpg" alt="Μάριος Γρίβας" loading="lazy" width="512" height="512" /></span>
-              <span class="person__name">Μάριος Γρίβας</span>
-              <span class="person__role">CIO, Lead Developer</span>
-              <span class="person__links">
-                <a href="https://www.linkedin.com/in/marios-grivas" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Μάριος Γρίβας">in</a>
-                <a href="https://github.com/mgr1vas" target="_blank" rel="noopener noreferrer" aria-label="GitHub — Μάριος Γρίβας">gh</a>
-              </span>
-            </li>
-            <li class="person up" style="--d:240ms">
-              <span class="person__photo"><img src="assets/gkarsoudis.jpg" alt="Δημήτρης Γκαρσούδης" loading="lazy" width="512" height="512" /></span>
-              <span class="person__name">Δημήτρης Γκαρσούδης</span>
-              <span class="person__role">CTO, Flutter Developer</span>
-              <span class="person__links">
-                <a href="https://www.linkedin.com/in/dimitrios-nikolaos-gkarsoudis-4a6154306" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Δημήτρης Γκαρσούδης">in</a>
-                <a href="https://github.com/Dimitrios-Nikolaos-Gkarsoudis" target="_blank" rel="noopener noreferrer" aria-label="GitHub — Δημήτρης Γκαρσούδης">gh</a>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- TEAM GALLERY -->
-      <section class="band band--ink" id="gallery-team">
-        <div class="wrap">
-          <header class="head head--center up">
-            <p class="eyebrow">Behind the scenes</p>
-            <h2>Η Ομάδα εν Δράσει</h2>
-            <p class="head__intro">
-              Στιγμιότυπα από την ομάδα κατά τη διάρκεια του ideathon και της ανάπτυξης της εφαρμογής.
-            </p>
-          </header>
-          <figure class="shot shot--wide up">
-            <img src="assets/team_ideathon.png" alt="Η ομάδα εν δράσει" loading="lazy" width="1536" height="864" />
-          </figure>
-        </div>
-      </section>
-
-      <!-- INTEREST -->
+      <!-- 6. INTEREST / FORMS -->
       <section class="band band--cta" id="interest">
         <div class="wrap">
           <header class="head head--center up">
@@ -312,22 +226,15 @@
 
           <div class="panel up" id="panel-driver" role="tabpanel" aria-labelledby="tab-driver">
             <p class="panel__lead">Θέλω να με προειδοποιεί για επικίνδυνα σημεία στη διαδρομή μου.</p>
-            
-            <!-- Honeypot enabled: data-netlify-honeypot="bot-field" -->
             <form id="driver-form" class="driver-form" name="driver-interest" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
-              
-              <!-- Κρυφό πεδίο που τα bots συμπληρώνουν, αλλά οι χρήστες δεν βλέπουν -->
-              <p hidden>
-                <label>Μην συμπληρώσετε αυτό το πεδίο αν είστε άνθρωπος: <input name="bot-field" /></label>
-              </p>
-
+              <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
               <label class="field">
                 <span>Email <abbr title="υποχρεωτικό">*</abbr></span>
                 <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" />
               </label>
               <label class="field">
                 <span>Γνωρίζετε κάποιον επικίνδυνο δρόμο ή σημείο;</span>
-                <textarea name="dangerous_roads_feedback" rows="4" placeholder="π.χ. Στροφή στην επαρχιακή οδό…, δρόμος χωρίς φωτισμό…, σημείο με συχνά ατυχήματα…"></textarea>
+                <textarea name="dangerous_roads_feedback" rows="4" placeholder="π.χ. Στροφή στην επαρχιακή οδό..."></textarea>
               </label>
               <label class="checkline"><input type="checkbox" name="news" checked /><span>Θέλω να ενημερώνομαι</span></label>
               
@@ -340,15 +247,8 @@
             <p class="panel__lead">Rent-a-car, ασφαλιστική, δήμος ή άλλη, θέλω demo &amp; δεδομένα.</p>
             <h3>Στοιχεία επιχείρησης</h3>
             <p class="panel__note">Συμπλήρωσε τα στοιχεία σου και θα επικοινωνήσουμε μαζί σου σύντομα.</p>
-            
-            <!-- Honeypot enabled: data-netlify-honeypot="bot-field" -->
             <form class="biz-form" id="business-form" name="business-contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
-              
-              <!-- Κρυφό πεδίο που τα bots συμπληρώνουν, αλλά οι χρήστες δεν βλέπουν -->
-              <p hidden>
-                <label>Μην συμπληρώσετε αυτό το πεδίο αν είστε άνθρωπος: <input name="bot-field" /></label>
-              </p>
-
+              <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
               <label class="field"><span>Ονοματεπώνυμο</span><input type="text" name="name" autocomplete="name" /></label>
               <div class="field-row">
                 <label class="field"><span>Email <abbr title="υποχρεωτικό">*</abbr></span><input type="email" name="email" required autocomplete="email" /></label>
@@ -368,12 +268,12 @@
                 </label>
               </div>
               <label class="field">
-                <span>Θέλετε demo ή περισσότερες πληροφορίες;</span>
-                <textarea name="demo_info" rows="4" placeholder="π.χ. Θα θέλαμε να δούμε demo ή να μάθουμε περισσότερα για πιθανή πιλοτική συνεργασία."></textarea>
+                <span>Θέλετε demo;</span>
+                <textarea name="demo_info" rows="4"></textarea>
               </label>
               
               <button class="btn btn--solid btn--block biz-form__submit" type="submit">Στείλε ενδιαφέρον</button>
-              <p class="form-ok biz-form__success" id="biz-ok" hidden aria-live="polite">Ευχαριστούμε! Το ενδιαφέρον σας καταγράφηκε με επιτυχία.</p>
+              <p class="form-ok biz-form__success" id="biz-ok" hidden aria-live="polite">Ευχαριστούμε! Το ενδιαφέρον σας καταγράφηκε.</p>
             </form>
           </div>
       </section>
@@ -392,18 +292,16 @@
       </div>
     </footer>
     
-    <!-- One and only COOKIE BANNER -->
+    <!-- COOKIE BANNER -->
     <div id="cookie-banner" class="cookie-banner" hidden>
       <div class="wrap cookie-banner__inner">
         <p>
-          Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία σας στο <strong>RoadSafetyInsights</strong>. 
-          Συνεχίζοντας, αποδέχεστε τη χρήση τους. Δείτε την <a href="policy.html" style="color: var(--orange); text-decoration: underline;">Πολιτική Απορρήτου</a>.
+          Χρησιμοποιούμε cookies για να βελτιώσουμε την εμπειρία σας. Δείτε την <a href="policy.html" style="color: var(--orange); text-decoration: underline;">Πολιτική Απορρήτου</a>.
         </p>
         <button id="cookie-accept" class="btn btn--solid btn--sm" type="button">Αποδοχή</button>
       </div>
     </div>
 
-    <!-- Loads the scripts -->
     <script src="js/main.js" defer></script>
     <script src="js/animations.js" defer></script>
   </body>
