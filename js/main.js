@@ -2,21 +2,21 @@ document.addEventListener('DOMContentLoaded', function() {
   
   /* ── 1. Mobile Burger Menu Logic ── */
   var burger = document.getElementById('burger');
-  var rail = document.getElementById('rail');
-  var railLinks = document.querySelectorAll('.rail__nav a, .rail__cta');
+  var header = document.getElementById('header');
+  var navLinks = document.querySelectorAll('.header__nav a');
 
-  if (burger && rail) {
+  if (burger && header) {
     // Toggle mobile navigation drawer
     burger.addEventListener('click', function() {
-      rail.classList.toggle('is-open');
-      var isOpen = rail.classList.contains('is-open');
+      header.classList.toggle('is-open');
+      var isOpen = header.classList.contains('is-open');
       burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
     // Automatically close mobile menu when clicking a navigation link
-    railLinks.forEach(function(link) {
+    navLinks.forEach(function(link) {
       link.addEventListener('click', function() {
-        rail.classList.remove('is-open');
+        header.classList.remove('is-open');
         burger.setAttribute('aria-expanded', 'false');
       });
     });
