@@ -1,0 +1,23 @@
+{
+  "name": "RoadSafetyInsights",
+  "short_name": "RSI",
+  "description": "Η πρώτη εφαρμογή που χαρτογραφεί επικίνδυνα σημεία και προειδοποιεί οδηγούς, στόλους και δήμους με πραγματικά δεδομένα ατυχημάτων.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#012624",
+  "theme_color": "#012624",
+  "icons": [
+    {
+      "src": "/assets/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
