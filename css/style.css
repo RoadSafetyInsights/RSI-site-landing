@@ -1013,6 +1013,12 @@ textarea {
   text-align: center;
 }
 
+.cookie-banner__actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 .cookie-banner p {
   margin: 0;
   font-size: 0.9rem;
@@ -1290,5 +1296,27 @@ textarea {
   
   .foot__meta {
     text-align: left;
+  }
+
+  .zig__panel { padding: 24px; }
+  .zig__panel h3 { font-size: 26px; }
+  .bars__n { font-size: 28px; }
+  .bars { margin-top: 24px; gap: 16px; }
+  .mini-stats dt { font-size: 28px; }
+}
+
+@media (max-width: 768px) {
+  .cookie-banner__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .cookie-banner__actions {
+    width: 100%;
+    justify-content: center;
+  }
+  .cookie-banner__actions .btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 13px;
   }
 }
