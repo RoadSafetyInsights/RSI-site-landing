@@ -34,5 +34,6 @@ Because this project uses ES6 Modules (`<script type="module">`) to import the W
 │   ├── animations.js    # IntersectionObserver for kinetic scroll reveals
 │   └── sliced-waves.js  # OGL WebGL background rendering & mouse interaction -> To be added
 └── assets/              # Images, logos, and UI mockups
+```
 
-*Managed by [Marios Grivas](https://github.com/mgr1vas) CIO, Lead Developer
+*Managed by [Marios Grivas](https://github.com/mgr1vas) CIO, Lead Developer*
