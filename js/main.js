@@ -1,88 +1,73 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Mobile Menu (Burger Toggle)
+  const burger = document.getElementById('burger');
+  const header = document.getElementById('header');
   
-  var burger = document.getElementById('burger');
-  var header = document.getElementById('header');
-  var navLinks = document.querySelectorAll('.header__nav a');
-
   if (burger && header) {
-    burger.addEventListener('click', function() {
+    burger.addEventListener('click', () => {
+      const isOpen = header.classList.contains('is-open');
       header.classList.toggle('is-open');
-      var isOpen = header.classList.contains('is-open');
-      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-
-    navLinks.forEach(function(link) {
-      link.addEventListener('click', function() {
-        header.classList.remove('is-open');
-        burger.setAttribute('aria-expanded', 'false');
-      });
+      burger.setAttribute('aria-expanded', !isOpen);
     });
   }
 
-  var tabBtns = document.querySelectorAll('.switch__btn');
-  var panels = document.querySelectorAll('.panel');
+  // 2. Scroll Progress Bar
+  const progressBar = document.getElementById('progress');
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = winScroll / height;
+      progressBar.style.transform = `scaleX(${scrolled})`;
+    }, { passive: true });
+  }
 
-  tabBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      tabBtns.forEach(function(b) {
-        b.classList.remove('is-active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      panels.forEach(function(p) {
-        p.setAttribute('hidden', '');
-      });
+  const tabDriver = document.getElementById('tab-driver');
+  const tabBiz = document.getElementById('tab-biz');
+  const panelDriver = document.getElementById('panel-driver');
+  const panelBiz = document.getElementById('panel-biz');
 
-      btn.classList.add('is-active');
-      btn.setAttribute('aria-selected', 'true');
-      var targetPanel = document.getElementById(btn.getAttribute('aria-controls'));
-      if (targetPanel) {
-        targetPanel.removeAttribute('hidden');
-      }
+  if (tabDriver && tabBiz && panelDriver && panelBiz) {
+    tabDriver.addEventListener('click', () => {
+      tabDriver.classList.add('is-active');
+      tabBiz.classList.remove('is-active');
+      tabDriver.setAttribute('aria-selected', 'true');
+      tabBiz.setAttribute('aria-selected', 'false');
+      panelDriver.removeAttribute('hidden');
+      panelBiz.setAttribute('hidden', '');
     });
-  });
 
-  function handleFormSubmit(formId, successMsgId, submitBtnClass) {
-    var form = document.getElementById(formId);
-    if (!form) return;
-
-    var submitBtn = form.querySelector(submitBtnClass);
-    
-    form.addEventListener("submit", function (e) {
-      e.preventDefault(); 
-      
-      if (submitBtn) submitBtn.disabled = true;
-
-      var formData = new FormData(form);
-
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
-      })
-      .then(function (response) {
-        if (response.ok) {
-          var successMsg = document.getElementById(successMsgId);
-          if (successMsg) successMsg.removeAttribute("hidden");
-          
-          form.reset();
-          
-          if (typeof grecaptcha !== "undefined") {
-            grecaptcha.reset();
-          }
-        } else {
-          console.error("Form submission failed on Netlify.");
-        }
-      })
-      .catch(function (error) {
-        console.error("Network error during submission:", error);
-      })
-      .finally(function () {
-        if (submitBtn) submitBtn.disabled = false;
-      });
+    tabBiz.addEventListener('click', () => {
+      tabBiz.classList.add('is-active');
+      tabDriver.classList.remove('is-active');
+      tabBiz.setAttribute('aria-selected', 'true');
+      tabDriver.setAttribute('aria-selected', 'false');
+      panelBiz.removeAttribute('hidden');
+      panelDriver.setAttribute('hidden', '');
     });
   }
 
-  handleFormSubmit("driver-form", "driver-ok", ".btn--driver-submit");
-  handleFormSubmit("business-form", "biz-ok", ".biz-form__submit");
+  const cookieBanner = document.getElementById('cookie-banner');
+  const btnAccept = document.getElementById('cookie-accept');
+  const btnDecline = document.getElementById('cookie-decline');
 
+  if (cookieBanner && !localStorage.getItem('rsi_cookie_consent')) {
+    cookieBanner.removeAttribute('hidden');
+  }
+
+  const closeBanner = (status) => {
+    localStorage.setItem('rsi_cookie_consent', status);
+    cookieBanner.classList.add('is-hiding');
+    setTimeout(() => {
+      cookieBanner.setAttribute('hidden', '');
+    }, 400); 
+  };
+
+  if (btnAccept) {
+    btnAccept.addEventListener('click', () => closeBanner('accepted'));
+  }
+
+  if (btnDecline) {
+    btnDecline.addEventListener('click', () => closeBanner('declined'));
+  }
 });
