@@ -1,3 +1,38 @@
+RRRRRRRRRRRRRRRRR      SSSSSSSSSSSSSSS IIIIIIIIII
+R::::::::::::::::R   SS:::::::::::::::SI::::::::I
+R::::::RRRRRR:::::R S:::::SSSSSS::::::SI::::::::I
+RR:::::R     R:::::RS:::::S     SSSSSSSII::::::II
+  R::::R     R:::::RS:::::S              I::::I  
+  R::::R     R:::::RS:::::S              I::::I  
+  R::::RRRRRR:::::R  S::::SSSS           I::::I  
+  R:::::::::::::RR    SS::::::SSSSS      I::::I  
+  R::::RRRRRR:::::R     SSS::::::::SS    I::::I  
+  R::::R     R:::::R       SSSSSS::::S   I::::I  
+  R::::R     R:::::R            S:::::S  I::::I  
+  R::::R     R:::::R            S:::::S  I::::I  
+RR:::::R     R:::::RSSSSSSS     S:::::SII::::::II
+R::::::R     R:::::RS::::::SSSSSS:::::SI::::::::I
+R::::::R     R:::::RS:::::::::::::::SS I::::::::I
+RRRRRRRR     RRRRRRR SSSSSSSSSSSSSSS   IIIIIIIIII
+                                                 
+# =====================================================================
+# Γεια σου, εξερευνητή του διαδικτύου! 
+# Αν διαβάζεις αυτό το αρχείο, πιθανότατα είσαι bot, AI assistant ή περίεργος developer.
+# Είτε έτσι είσαι είτε αλλιώς, καλώς ήρθες στο RoadSafetyInsights!
+# =====================================================================
+
 User-agent: *
 Allow: /
+
+# Easter Eggs | Μόνο για γερά νεύρα και developers
+Disallow: /terminal
+Disallow: /secret
+Disallow: /sandbox
+Disallow: /syslog
+
+# Απαγορεύεται η είσοδος σε bots που προσπαθούν να κάνουν mischief
+User-agent: BadBot
+Disallow: /
+
+# Εδώ θα βρεις τον θυσαυρό μας
 Sitemap: https://www.roadsafetyinsights.com/sitemap.xml
