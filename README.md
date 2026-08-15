@@ -18,8 +18,4 @@ A cinematic, high-performance landing page for **RoadSafetyInsights (RSI)**, an 
 *   **OGL (WebGL)** (Lightweight 3D rendering for the background)
 *   **Netlify** (Hosting & Form handling)
 
-## Local Development (Important)
-
-Because this project uses ES6 Modules (`<script type="module">`) to import the WebGL library from an external CDN, **you cannot open the `index.html` file directly from your file explorer** (e.g., `file:///C:/...`). Your browser will block the scripts due to strict CORS security policies.
-
 *Managed by [Marios Grivas](https://github.com/mgr1vas) CIO, Lead Developer*
