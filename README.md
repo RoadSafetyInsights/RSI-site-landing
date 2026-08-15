@@ -22,18 +22,4 @@ A cinematic, high-performance landing page for **RoadSafetyInsights (RSI)**, an 
 
 Because this project uses ES6 Modules (`<script type="module">`) to import the WebGL library from an external CDN, **you cannot open the `index.html` file directly from your file explorer** (e.g., `file:///C:/...`). Your browser will block the scripts due to strict CORS security policies.
 
-## File Structure
-```text
-├── index.html           # Main landing page
-├── policy.html          # Privacy Policy page
-├── team.html            # The Team / Roster page
-├── css/
-│   └── style.css        # Main stylesheet (Auros tokens, layout, mobile queries)
-├── js/
-│   ├── main.js          # Burger menu, form tabs, cookie banner logic
-│   ├── animations.js    # IntersectionObserver for kinetic scroll reveals
-│   └── sliced-waves.js  # OGL WebGL background rendering & mouse interaction -> To be added
-└── assets/              # Images, logos, and UI mockups
-```
-
 *Managed by [Marios Grivas](https://github.com/mgr1vas) CIO, Lead Developer*
