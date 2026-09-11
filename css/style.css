@@ -886,6 +886,26 @@ em {
   color: #fff;
 }
 
+/* Neon styling directly targeting the 2nd toggle button (Είμαι επιχείρηση) */
+.switch__btn:nth-child(2),
+.switch__btn.business-toggle-btn {
+  background: rgba(10, 37, 64, 0.6);
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.25), inset 0 0 6px rgba(0, 240, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.switch__btn:nth-child(2):hover,
+.switch__btn:nth-child(2).is-active,
+.switch__btn.business-toggle-btn:hover,
+.switch__btn.business-toggle-btn.is-active {
+  background: #00f0ff;
+  color: #0a2540;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.7), 0 0 35px rgba(0, 240, 255, 0.4);
+  font-weight: 700;
+}
+
 .panel {
   margin: 28px auto 0;
   max-width: 640px;
