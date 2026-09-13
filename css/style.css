@@ -719,20 +719,27 @@ em {
   background: linear-gradient(90deg, var(--orange), var(--sky));
 }
 
+/* Redesigned responsive screenshots section */
 .shots {
-  margin-top: 52px;
+  margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 24px;
+  max-width: 680px;
+  margin-inline: auto;
+  justify-content: center;
 }
 
 .shot {
-  margin: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 320px;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 12px;
+  border-radius: 20px;
+  padding: 10px;
   overflow: hidden;
+  box-shadow: 0 10px 25px -10px rgba(10, 37, 64, 0.15);
   transition: transform .35s ease, box-shadow .35s ease;
 }
 
@@ -744,17 +751,21 @@ em {
 .shot img {
   width: 100%;
   height: auto;
+  max-height: 480px;
+  object-fit: cover;
   border-radius: 14px;
   transition: transform .6s ease;
+  display: block;
 }
 
 .shot:hover img {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .shot figcaption {
-  padding: 12px 8px 4px;
-  font-size: 14px;
+  padding: 8px 4px 2px;
+  font-size: 13px;
+  text-align: center;
   color: var(--ink-soft);
 }
 
@@ -1292,7 +1303,6 @@ textarea {
   }
   
   .tiles, 
-  .shots, 
   .field-row {
     grid-template-columns: 1fr;
   }
@@ -1338,5 +1348,96 @@ textarea {
     flex: 1;
     padding: 12px;
     font-size: 13px;
+  }
+}
+
+/* Accelerator / Recognition Section */
+.recognition-band {
+  background-color: #16304a;
+  padding: 42px 0;
+  color: #ffffff;
+}
+
+.recognition__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 24px;
+}
+
+.recognition__title {
+  font-family: var(--font-body);
+  font-size: clamp(22px, 3.2vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.recognition__logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.recognition__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recognition__logo {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1); 
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.recognition__logo--pos {
+  height: 90px; /* Desktop Logo Height */
+  filter: none;
+}
+
+.recognition__logo:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+@media (max-width: 768px) {
+  .recognition-band {
+    padding: 34px 0;
+  }
+
+  .recognition__logos {
+    gap: 28px;
+  }
+
+  .recognition__logo {
+    height: 40px;
+  }
+
+  .recognition__logo--pos {
+    height: 50px; /* Mobile Logo Height */
+  }
+}
+
+/* Mobile optimizations for screenshots */
+@media (max-width: 600px) {
+  .shots {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+    gap: 20px;
+  }
+
+  .shot {
+    max-width: 100%;
+  }
+
+  .shot img {
+    max-height: 400px;
   }
 }
