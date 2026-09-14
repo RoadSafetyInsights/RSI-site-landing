@@ -1398,7 +1398,7 @@ textarea {
 }
 
 .recognition__logo--pos {
-  height: 90px; /* Desktop Logo Height */
+  height: 130px; /* Desktop Logo Height */
   filter: none;
 }
 
@@ -1420,8 +1420,9 @@ textarea {
     height: 40px;
   }
 
+  /* Increased height for the POS4work logo on mobile */
   .recognition__logo--pos {
-    height: 50px; /* Mobile Logo Height */
+    height: 120px;
   }
 }
 
