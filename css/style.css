@@ -130,6 +130,30 @@ em {
   color: #fff;
 }
 
+.header__demo {
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #fff !important;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  box-shadow: none;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.header__demo:hover,
+.header__demo[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.65);
+  color: #fff !important;
+  box-shadow: none;
+}
+
+.header__demo:hover {
+  transform: translateY(-2px);
+}
+
 .header__cta {
   background: var(--orange);
   color: #fff !important;
@@ -1301,7 +1325,7 @@ textarea {
     0% { transform: translateY(0); }
     100% { transform: translateY(-15px); }
   }
-  
+
   .tiles, 
   .field-row {
     grid-template-columns: 1fr;
