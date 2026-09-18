@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="el">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo | RoadSafetyInsights</title>
+    <meta
+      name="description"
+      content="Δείτε το RoadSafetyInsights σε λειτουργία: χάρτης κινδύνου, πλοήγηση και προληπτικές ειδοποιήσεις οδικής ασφάλειας."
+    />
+    <meta name="author" content="RoadSafetyInsights Team" />
+    <meta name="theme-color" content="#0a2540" />
+
+    <link rel="icon" type="image/png" href="assets/rsi_logo.png" />
+    <link rel="apple-touch-icon" href="assets/rsi_logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;500;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/demo.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Μετάβαση στο περιεχόμενο</a>
+
+    <header class="site-header" id="header">
+      <div class="wrap header__inner">
+        <a class="header__logo" href="index.html#top" aria-label="RoadSafetyInsights, Αρχική">
+          <img src="assets/rsi_logo.png" alt="Λογότυπο" width="34" height="34" />
+          <span>RoadSafetyInsights</span>
+        </a>
+
+        <nav class="header__nav" aria-label="Κύρια πλοήγηση">
+          <a href="index.html#app">Εφαρμογή</a>
+          <a href="index.html#data">Χαρακτηριστικά</a>
+          <a href="index.html#gallery-app">Στιγμιότυπα</a>
+          <a href="team.html">Η Ομάδα</a>
+          <a class="header__demo" href="demo.html" aria-current="page">Demo</a>
+          <a class="header__cta" href="index.html#interest">Ενδιαφέρον</a>
+        </nav>
+
+        <button class="burger" id="burger" type="button" aria-label="Άνοιγμα μενού" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
+    <main id="main">
+      <section class="demo-hero">
+        <div class="demo-hero__bg" aria-hidden="true"></div>
+        <div class="wrap demo-hero__inner">
+          <header class="demo-intro up">
+            <p class="eyebrow">Product Demo</p>
+            <h1>Δείτε το RoadSafetyInsights <em>σε λειτουργία.</em></h1>
+            <p>
+              Από την επισκόπηση επικίνδυνων σημείων μέχρι την πλοήγηση και τις προληπτικές ειδοποιήσεις,
+              το demo παρουσιάζει τη βασική εμπειρία του οδηγού μέσα από το Android prototype.
+            </p>
+          </header>
+
+          <div class="demo-device-stage up" style="--d:120ms">
+            <div class="android-phone" aria-label="Android phone demo frame">
+              <div class="android-phone__speaker" aria-hidden="true"></div>
+              <div class="android-phone__camera" aria-hidden="true"></div>
+              <div class="android-phone__screen">
+                <video
+                  class="app-demo-video"
+                  controls
+                  playsinline
+                  preload="metadata"
+                  poster="assets/navigation.jpg"
+                  aria-label="RoadSafetyInsights Android application demo"
+                >
+                  <source src="assets/RSI_DEMO.mp4" type="video/mp4" />
+                  Το πρόγραμμα περιήγησής σας δεν υποστηρίζει αναπαραγωγή βίντεο.
+                </video>
+              </div>
+              <div class="android-phone__gesture" aria-hidden="true"></div>
+            </div>
+
+            <div class="demo-caption">
+              <span class="demo-status"><i aria-hidden="true"></i> Android prototype</span>
+              <span>Navigation · Risk detection · Safety alerts</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band demo-architecture" id="architecture">
+        <div class="wrap">
+          <header class="head head--center up">
+            <p class="eyebrow">Architecture</p>
+            <h2>Πώς συνδέονται τα κομμάτια</h2>
+            <p class="head__intro">
+              Μια συνοπτική εικόνα του repository, των δεδομένων, των υπηρεσιών και του runtime flow της εφαρμογής.
+            </p>
+          </header>
+
+          <figure class="diagram-card up" style="--d:100ms">
+            <a href="assets/repository-diagram.png" target="_blank" rel="noopener noreferrer" aria-label="Άνοιγμα διαγράμματος σε πλήρες μέγεθος">
+              <img
+                src="assets/repository-diagram.png"
+                alt="RoadSafetyInsights repository architecture diagram"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>Πατήστε στο διάγραμμα για προβολή σε πλήρες μέγεθος.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="band band--ink demo-details">
+        <div class="wrap">
+          <header class="head up">
+            <p class="eyebrow">Inside the demo</p>
+            <h2>Τι παρουσιάζει το prototype</h2>
+          </header>
+
+          <div class="demo-info-grid">
+            <article class="demo-info-card up">
+              <span class="demo-info-card__no">01</span>
+              <h3>Χάρτης &amp; Πλοήγηση</h3>
+              <p>
+                Διαδραστικός χάρτης, αναζήτηση προορισμού, route calculation και παρακολούθηση της διαδρομής
+                με επίκεντρο την καθαρή εμπειρία του οδηγού.
+              </p>
+            </article>
+
+            <article class="demo-info-card up" style="--d:80ms">
+              <span class="demo-info-card__no">02</span>
+              <h3>Safety Layer</h3>
+              <p>
+                Accident και road-risk data αξιολογούνται σε σχέση με την ενεργή διαδρομή, ώστε το app να εμφανίζει
+                προληπτικές ειδοποιήσεις πριν από relevant risk zones.
+              </p>
+            </article>
+
+            <article class="demo-info-card up" style="--d:160ms">
+              <span class="demo-info-card__no">03</span>
+              <h3>Demo &amp; Partnerships</h3>
+              <p>
+                Το simulation mode επιτρέπει repeatable testing και παρουσιάσεις, ενώ η αρχιτεκτονική επεκτείνεται
+                σε rental, fleet και insurance integrations.
+              </p>
+            </article>
+          </div>
+
+          <div class="demo-note up" style="--d:220ms">
+            <strong>Prototype note.</strong>
+            Η σελίδα παρουσιάζει την τρέχουσα demo εμπειρία. Ορισμένα datasets και integrations χρησιμοποιούν
+            test/mock δεδομένα και δεν πρέπει να ερμηνεύονται ως ολοκληρωμένη production υπηρεσία.
+          </div>
+        </div>
+      </section>
+
+      <section class="band band--cta demo-final-cta">
+        <div class="wrap">
+          <div class="demo-final-cta__inner up">
+            <div>
+              <p class="eyebrow">RoadSafetyInsights</p>
+              <h2>Θέλετε να δείτε περισσότερα;</h2>
+            </div>
+            <a class="btn btn--solid" href="index.html#interest">Επικοινωνία <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot__inner">
+        <span class="foot__brand"><span aria-hidden="true">RSI</span>| RoadSafetyInsights</span>
+        <div class="foot__meta">
+          <p>© 2026 RoadSafetyInsights | RSI</p>
+          <p>
+            Contact: <a href="mailto:info@roadsafetyinsights.com">info@roadsafetyinsights.com</a> |
+            <a href="policy.html">Πολιτική Απορρήτου</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+    <script src="js/animations.js" defer></script>
+  </body>
+</html>
