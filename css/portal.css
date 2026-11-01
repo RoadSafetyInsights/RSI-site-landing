@@ -1,3 +1,9 @@
+
+/* Ensure authenticated/login views never render at the same time */
+[hidden] {
+  display: none !important;
+}
+
 :root {
   --portal-dark: #050b14;
   --portal-navy: #0a2540;
