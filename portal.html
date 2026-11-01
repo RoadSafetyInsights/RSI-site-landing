@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RSI Partner Portal | Road Safety Insights</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="icon" type="image/png" href="assets/rsi_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/portal.css" />
+</head>
+<body class="portal-body">
+
+  <header class="portal-top">
+    <a class="portal-brand" href="index.html" aria-label="Road Safety Insights home">
+      <img src="assets/rsi_logo.png" alt="RSI logo" />
+      <div>
+        <strong>Road Safety Insights</strong>
+        <span>Partner Portal</span>
+      </div>
+    </a>
+
+    <a class="portal-back" href="index.html">← Back to website</a>
+  </header>
+
+  <main>
+    <!-- LOGIN -->
+    <section id="loginView" class="portal-login">
+      <div class="portal-login__visual">
+        <p class="portal-eyebrow">RSI PARTNER ACCESS</p>
+        <h1>One portal.<br><em>Your fleet.</em></h1>
+        <p>Access rental activity, RSI usage and billing statistics.</p>
+      </div>
+
+      <div class="portal-login__card">
+        <div class="portal-login__logo">
+          <img src="assets/rsi_logo.png" alt="" />
+        </div>
+
+        <h2>Login Portal</h2>
+        <p class="portal-muted">Rent-a-Car agencies & RSI administrators</p>
+
+        <form id="loginForm" class="portal-form">
+          <label>
+            Email
+            <input id="loginEmail" type="email" autocomplete="email" required />
+          </label>
+
+          <label>
+            Password
+            <input id="loginPassword" type="password" autocomplete="current-password" required />
+          </label>
+
+          <p id="loginError" class="portal-error" hidden></p>
+
+          <button id="loginButton" class="portal-primary" type="submit">
+            Sign in
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboardView" class="portal-app" hidden>
+      <aside class="portal-sidebar">
+        <div class="portal-sidebar__brand">
+          <img src="assets/rsi_logo.png" alt="RSI" />
+          <span>RSI</span>
+        </div>
+
+        <nav class="portal-nav">
+          <button class="is-active" data-page="overview">Overview</button>
+          <button data-page="rentals">Rentals</button>
+          <button data-page="billing">Billing</button>
+        </nav>
+
+        <div class="portal-sidebar__bottom">
+          <div class="portal-account">
+            <span id="accountRole">RAC</span>
+            <strong id="accountAgency">Agency</strong>
+          </div>
+          <button id="logoutButton" class="portal-logout">Log out</button>
+        </div>
+      </aside>
+
+      <div class="portal-main">
+        <header class="portal-dashboard-head">
+          <div>
+            <p class="portal-eyebrow" id="dashboardRoleLabel">PARTNER DASHBOARD</p>
+            <h1 id="dashboardTitle">Fleet Overview</h1>
+          </div>
+          <div class="portal-user">
+            <span id="userEmail"></span>
+            <strong id="agencyNameTop"></strong>
+          </div>
+        </header>
+
+        <div id="portalMessage" class="portal-message" hidden></div>
+
+        <!-- OVERVIEW -->
+        <section id="page-overview" class="portal-page">
+          <div class="portal-kpis">
+            <article>
+              <span>Active rentals</span>
+              <strong id="statActiveRentals">0</strong>
+            </article>
+            <article>
+              <span>RSI enabled</span>
+              <strong id="statRsiEnabled">0</strong>
+            </article>
+            <article>
+              <span>RSI owed</span>
+              <strong id="statRsiOwed">€0</strong>
+            </article>
+            <article>
+              <span>Rental keeps</span>
+              <strong id="statPartnerRevenue">€0</strong>
+            </article>
+          </div>
+
+          <div class="portal-grid">
+            <article class="portal-panel portal-panel--wide">
+              <div class="portal-panel__head">
+                <h2>Current rentals</h2>
+                <button class="portal-link" data-open-page="rentals">View all</button>
+              </div>
+              <div id="overviewRentalList" class="portal-rental-list"></div>
+            </article>
+
+            <article class="portal-panel">
+              <div class="portal-panel__head">
+                <h2>Activity</h2>
+              </div>
+              <div class="portal-summary">
+                <div>
+                  <span>Active vehicle-days</span>
+                  <strong id="statVehicleDays">0</strong>
+                </div>
+                <div>
+                  <span>Gross add-on</span>
+                  <strong id="statGrossRevenue">€0</strong>
+                </div>
+                <div id="adminAgencyStat" hidden>
+                  <span>Agencies</span>
+                  <strong id="statAgencies">0</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- RENTALS -->
+        <section id="page-rentals" class="portal-page" hidden>
+          <article class="portal-panel">
+            <div class="portal-panel__head portal-panel__head--filters">
+              <h2>Rental contracts</h2>
+              <input id="rentalSearch" class="portal-search" type="search" placeholder="Search vehicle, plate or customer" />
+            </div>
+
+            <div class="portal-table-wrap">
+              <table class="portal-table">
+                <thead>
+                  <tr>
+                    <th id="agencyColumnHeader">Agency</th>
+                    <th>Vehicle</th>
+                    <th>Customer</th>
+                    <th>Lease</th>
+                    <th>RSI</th>
+                    <th>RSI owed</th>
+                    <th>Rental keeps</th>
+                  </tr>
+                </thead>
+                <tbody id="rentalsTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- BILLING -->
+        <section id="page-billing" class="portal-page" hidden>
+          <div class="portal-kpis portal-kpis--three">
+            <article>
+              <span>RSI owed</span>
+              <strong id="billingRsiOwed">€0</strong>
+            </article>
+            <article>
+              <span>Rental keeps</span>
+              <strong id="billingPartnerRevenue">€0</strong>
+            </article>
+            <article>
+              <span>Gross add-on</span>
+              <strong id="billingGross">€0</strong>
+            </article>
+          </div>
+
+          <article class="portal-panel">
+            <div class="portal-panel__head">
+              <h2>Statements</h2>
+            </div>
+            <div id="statementList" class="portal-statements"></div>
+          </article>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/portal.js"></script>
+</body>
+</html>
